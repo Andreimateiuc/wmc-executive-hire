@@ -1,0 +1,51 @@
+# Image Folder
+
+Place your high-quality images here with the following names:
+
+## Required Images:
+
+### Home Page:
+- hero-background.jpg (1920x1080px recommended)
+- mercedes-e-class.jpg (800x600px)
+- mercedes-s-class.jpg (800x600px)
+- mercedes-v-class.jpg (800x600px)
+
+### About Page:
+- about-luxury-car.jpg (800x600px)
+- professional-chauffeur.jpg (800x600px)
+- chauffeur-service.jpg (800x600px)
+
+### Services Page:
+- airport-transfer.jpg (800x600px)
+- corporate-travel.jpg (800x600px)
+- special-events.jpg (800x600px)
+- long-distance.jpg (800x600px)
+
+### Fleet Page:
+- mercedes-e-class-main.jpg (1200x800px)
+- mercedes-s-class-main.jpg (1200x800px)
+- mercedes-v-class-main.jpg (1200x800px)
+
+## Image Guidelines:
+
+- Use high-quality, professional photos
+- Optimize images for web (compress without losing quality)
+- Recommended format: JPG for photos, PNG for logos
+- Consider using WebP format for better performance
+- All images should have descriptive alt text (already included in HTML)
+- Ensure images are properly licensed for commercial use
+
+## Image Optimization Tools:
+
+- TinyPNG (https://tinypng.com/)
+- Squoosh (https://squoosh.app/)
+- ImageOptim (Mac)
+- GIMP (Free, cross-platform)
+
+## Stock Photo Resources:
+
+- Unsplash (https://unsplash.com/)
+- Pexels (https://pexels.com/)
+- Pixabay (https://pixabay.com/)
+
+Note: Make sure you have the rights to use any images on your website.

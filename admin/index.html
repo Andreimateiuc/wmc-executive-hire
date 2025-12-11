@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - WMC Executive Private Hire</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="admin-styles.css">
+</head>
+<body class="admin-body">
+    <!-- Admin Navigation -->
+    <nav class="admin-nav">
+        <div class="admin-nav-header">
+            <h2>WMC Admin</h2>
+            <button class="mobile-menu-toggle" id="adminMobileToggle">☰</button>
+        </div>
+        <ul class="admin-nav-menu" id="adminNavMenu">
+            <li><a href="#dashboard" class="active" data-section="dashboard">📊 Dashboard</a></li>
+            <li><a href="#bookings" data-section="bookings">📅 Bookings</a></li>
+            <li><a href="#customers" data-section="customers">👥 Customers</a></li>
+            <li><a href="#messages" data-section="messages">💬 Messages</a></li>
+            <li><a href="#settings" data-section="settings">⚙️ Settings</a></li>
+            <li><a href="#" id="logoutBtn">🚪 Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+        <div class="admin-header">
+            <h1 id="pageTitle">Dashboard</h1>
+            <div class="admin-user-info">
+                <span id="adminUsername">Admin</span>
+            </div>
+        </div>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard-section" class="admin-section active">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📅</div>
+                    <div class="stat-info">
+                        <h3 id="totalBookings">0</h3>
+                        <p>Total Bookings</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⏳</div>
+                    <div class="stat-info">
+                        <h3 id="pendingBookings">0</h3>
+                        <p>Pending Bookings</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📆</div>
+                    <div class="stat-info">
+                        <h3 id="todayBookings">0</h3>
+                        <p>Today's Bookings</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-info">
+                        <h3 id="totalCustomers">0</h3>
+                        <p>Total Customers</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💬</div>
+                    <div class="stat-info">
+                        <h3 id="unreadMessages">0</h3>
+                        <p>Unread Messages</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-info">
+                        <h3 id="monthRevenue">£0</h3>
+                        <p>This Month Revenue</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-content">
+                <div class="recent-bookings-card">
+                    <h2>Recent Bookings</h2>
+                    <div id="recentBookingsList" class="bookings-list">
+                        <p class="loading">Loading...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bookings Section -->
+        <section id="bookings-section" class="admin-section">
+            <div class="section-controls">
+                <div class="filter-group">
+                    <label>Status:</label>
+                    <select id="bookingStatusFilter">
+                        <option value="">All</option>
+                        <option value="pending">Pending</option>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="completed">Completed</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Date:</label>
+                    <input type="date" id="bookingDateFilter">
+                </div>
+                <button class="btn-primary" id="refreshBookings">Refresh</button>
+            </div>
+            <div id="bookingsTable" class="data-table">
+                <p class="loading">Loading bookings...</p>
+            </div>
+        </section>
+
+        <!-- Customers Section -->
+        <section id="customers-section" class="admin-section">
+            <h2>Customer Management</h2>
+            <div id="customersTable" class="data-table">
+                <p class="loading">Loading customers...</p>
+            </div>
+        </section>
+
+        <!-- Messages Section -->
+        <section id="messages-section" class="admin-section">
+            <div class="section-controls">
+                <div class="filter-group">
+                    <label>Status:</label>
+                    <select id="messageStatusFilter">
+                        <option value="">All</option>
+                        <option value="new">New</option>
+                        <option value="read">Read</option>
+                        <option value="replied">Replied</option>
+                    </select>
+                </div>
+                <button class="btn-primary" id="refreshMessages">Refresh</button>
+            </div>
+            <div id="messagesTable" class="data-table">
+                <p class="loading">Loading messages...</p>
+            </div>
+        </section>
+
+        <!-- Settings Section -->
+        <section id="settings-section" class="admin-section">
+            <h2>Settings</h2>
+            <div class="settings-card">
+                <h3>Change Password</h3>
+                <form id="changePasswordForm">
+                    <div class="form-group">
+                        <label>Current Password</label>
+                        <input type="password" id="currentPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label>New Password</label>
+                        <input type="password" id="newPassword" required minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm New Password</label>
+                        <input type="password" id="confirmPassword" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Change Password</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script src="admin-script.js"></script>
+</body>
+</html>
