@@ -169,4 +169,4 @@ For questions or support, contact the development team.
 
 **Version**: 1.0.0  
 **Last Updated**: 2024  
-**Developer**: BLACKBOXAI
+**Developer**: Andrei Mateiuc
