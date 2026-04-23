@@ -1393,6 +1393,21 @@ section {
     color: var(--color-gold-dark);
 }
 
+/* Ensure long contact text (emails / numbers) wraps inside the card and doesn't overflow */
+.method-link {
+    display: inline-block;
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+@media (max-width: 600px) {
+    .method-card { padding: 1rem; }
+    .method-icon { font-size: 2.4rem; }
+    .method-link { font-size: 1rem; }
+}
+
 .contact-section {
     padding: 5rem 0;
 }

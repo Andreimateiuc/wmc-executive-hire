@@ -192,7 +192,49 @@ document.addEventListener('DOMContentLoaded', function() {
                 submitButton.textContent = 'Submitting...';
                 submitButton.disabled = true;
                 
-                // Send to API
+                // Prepare WhatsApp message and open chat
+                const waNumber = '447501073623';
+                // Friendly labels for vehicle and service
+                const vehicleNames = {
+                    'e-class': 'Mercedes E-Class',
+                    's-class': 'Mercedes S-Class',
+                    'v-class': 'Mercedes V-Class'
+                };
+                const serviceNames = {
+                    'airport': 'Airport Transfer',
+                    'corporate': 'Corporate Travel',
+                    'event': 'Special Event',
+                    'hourly': 'Hourly Hire',
+                    'distance': 'Long Distance',
+                    'other': 'Other'
+                };
+
+                const lines = [];
+                lines.push('Booking request from website:');
+                lines.push(`Name: ${formData.fullName}`);
+                lines.push(`Email: ${formData.email}`);
+                lines.push(`Phone: ${formData.phone}`);
+                lines.push(`Vehicle: ${vehicleNames[formData.vehicle] || formData.vehicle}`);
+                lines.push(`Service: ${serviceNames[formData.serviceType] || formData.serviceType}`);
+                lines.push(`Passengers: ${formData.passengers}`);
+                lines.push(`Pickup: ${formData.pickupLocation}`);
+                lines.push(`Dropoff: ${formData.dropoffLocation}`);
+                lines.push(`Date: ${formData.pickupDate}`);
+                lines.push(`Time: ${formData.pickupTime}`);
+                if (formData.returnJourney === 'yes' && formData.returnDate) {
+                    lines.push(`Return: ${formData.returnDate}`);
+                }
+                if (formData.specialRequests) {
+                    lines.push(`Requests: ${formData.specialRequests}`);
+                }
+                lines.push('Please wait for approval. We will confirm shortly.');
+                const waText = encodeURIComponent(lines.join('\n'));
+                const waUrl = `https://wa.me/${waNumber}?text=${waText}`;
+
+                // Open WhatsApp chat in new tab/window (user will send the message)
+                window.open(waUrl, '_blank');
+
+                // Also send to API in background so server records the booking
                 fetch('/api/bookings', {
                     method: 'POST',
                     headers: {
@@ -202,42 +244,54 @@ document.addEventListener('DOMContentLoaded', function() {
                 })
                 .then(response => response.json())
                 .then(data => {
-                    if (data.success) {
-                        // Hide form and show success message
-                        bookingForm.style.display = 'none';
-                        const formSuccess = document.getElementById('formSuccess');
-                        if (formSuccess) {
-                            formSuccess.style.display = 'block';
-                            // Update success message with booking reference
-                            const successMessage = formSuccess.querySelector('p');
-                            if (successMessage && data.data.bookingReference) {
-                                successMessage.innerHTML = `Thank you for your booking request. Your booking reference is <strong>${data.data.bookingReference}</strong>. We'll contact you shortly with a confirmation and quote.`;
+                    // Show success message regardless of API response since WhatsApp was opened
+                    bookingForm.style.display = 'none';
+                    const formSuccess = document.getElementById('formSuccess');
+                    if (formSuccess) {
+                        formSuccess.style.display = 'block';
+                        const successMessage = formSuccess.querySelector('p');
+                        if (successMessage) {
+                            if (data && data.data && data.data.bookingReference) {
+                                successMessage.innerHTML = `Thank you. Your booking reference is <strong>${data.data.bookingReference}</strong>. We have opened WhatsApp for you to send the booking details. Please wait for approval.`;
+                            } else {
+                                successMessage.innerHTML = `Thank you. We have opened WhatsApp for you to send the booking details. Please wait for approval and we will confirm shortly.`;
                             }
                         }
-                        
-                        // Scroll to success message
-                        formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        
-                        // Reset form after a delay
-                        setTimeout(() => {
-                            bookingForm.reset();
-                            bookingForm.style.display = 'block';
-                            formSuccess.style.display = 'none';
-                            submitButton.textContent = originalButtonText;
-                            submitButton.disabled = false;
-                        }, 10000);
-                    } else {
-                        // Show error message
-                        alert('Failed to submit booking. Please try again or call us directly.');
+                    }
+
+                    formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                    // Reset form after a delay
+                    setTimeout(() => {
+                        bookingForm.reset();
+                        bookingForm.style.display = 'block';
+                        formSuccess.style.display = 'none';
                         submitButton.textContent = originalButtonText;
                         submitButton.disabled = false;
-                    }
+                    }, 10000);
                 })
                 .catch(error => {
                     console.error('Booking submission error:', error);
-                    alert('Failed to submit booking. Please try again or call us directly at +44 7501 073623');
-                    submitButton.textContent = originalButtonText;
-                    submitButton.disabled = false;
+                    // Still show success because WhatsApp chat was opened
+                    bookingForm.style.display = 'none';
+                    const formSuccess = document.getElementById('formSuccess');
+                    if (formSuccess) {
+                        formSuccess.style.display = 'block';
+                        const successMessage = formSuccess.querySelector('p');
+                        if (successMessage) {
+                            successMessage.innerHTML = `Thank you. We have opened WhatsApp for you to send the booking details. Please wait for approval. (Saving to server failed — please follow up if you do not receive confirmation.)`;
+                        }
+                    }
+
+                    formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                    setTimeout(() => {
+                        bookingForm.reset();
+                        bookingForm.style.display = 'block';
+                        formSuccess.style.display = 'none';
+                        submitButton.textContent = originalButtonText;
+                        submitButton.disabled = false;
+                    }, 10000);
                 });
             } else {
                 // Scroll to first error

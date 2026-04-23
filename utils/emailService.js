@@ -82,7 +82,7 @@ class EmailService {
                             <p>If you have any questions, please don't hesitate to contact us:</p>
                             <p>
                                 📞 Phone: <a href="tel:+447501073623">+44 7501 073623</a><br>
-                                📧 Email: <a href="mailto:wmctransportltd@gmail.com">wmctransportltd@gmail.com</a><br>
+                                📧 Email: <a href="mailto:help@wmcprivatehire.com">help@wmcprivatehire.com</a><br>
                                 💬 WhatsApp: <a href="https://wa.me/447501073623">Message Us</a>
                             </p>
                         </div>
@@ -109,7 +109,7 @@ class EmailService {
     async sendAdminNotification(bookingData) {
         const mailOptions = {
             from: process.env.EMAIL_FROM || 'WMC Executive Private Hire <noreply@wmcexecutive.co.uk>',
-            to: process.env.EMAIL_TO || 'wmctransportltd@gmail.com',
+            to: process.env.EMAIL_TO || 'help@wmcprivatehire.com',
             subject: `New Booking Request - ${bookingData.bookingReference}`,
             html: `
                 <!DOCTYPE html>
@@ -206,7 +206,7 @@ class EmailService {
     async sendContactNotification(contactData) {
         const mailOptions = {
             from: process.env.EMAIL_FROM || 'WMC Executive Private Hire <noreply@wmcexecutive.co.uk>',
-            to: process.env.EMAIL_TO || 'wmctransportltd@gmail.com',
+            to: process.env.EMAIL_TO || 'help@wmcprivatehire.com',
             subject: `New Contact Message - ${contactData.subject}`,
             html: `
                 <!DOCTYPE html>
@@ -292,13 +292,13 @@ class EmailService {
                         <div class="content">
                             <h2>Dear ${contactData.customerName},</h2>
                             <p>Thank you for contacting WMC Executive Private Hire. We have received your message and will respond as soon as possible.</p>
-                            <p>Our team typically responds within 2-4 hours during business hours (9am-6pm, Monday-Friday). For urgent inquiries, please call us directly at <a href="tel:+447501073623">+44 7501 073623</a>.</p>
+                            <p>Our team typically responds within 2-4 hours during business hours (9am-6pm, Monday-Friday). For urgent inquiries, please message us on WhatsApp at <a href="https://wa.me/447501073623">+44 7501 073623</a>.</p>
                             <p>We look forward to serving you!</p>
                             <p>Best regards,<br>WMC Executive Private Hire Team</p>
                         </div>
                         <div class="footer">
                             <p>WMC Executive Private Hire - Premium Private Hire Service in Northampton</p>
-                            <p>📞 +44 7501 073623 | 📧 wmctransportltd@gmail.com</p>
+                            <p>💬 +44 7501 073623 | 📧 help@wmcprivatehire.com</p>
                         </div>
                     </div>
                 </body>
