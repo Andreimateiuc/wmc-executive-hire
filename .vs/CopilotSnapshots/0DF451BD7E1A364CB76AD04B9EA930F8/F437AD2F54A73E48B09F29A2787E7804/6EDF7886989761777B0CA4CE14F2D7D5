@@ -1,0 +1,372 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact WMC Executive Private Hire - Book your luxury taxi in Northampton. 24/7 service, instant quotes, professional chauffeurs. Call +44 7501 073623 or book online.">
+    <meta name="keywords" content="contact WMC Executive, book Northampton taxi, private hire booking, airport transfer booking, executive car hire contact">
+    <title>Contact & Book | WMC Executive Private Hire | Northampton Taxi Booking</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="index.html">
+                        <span class="logo-text">WMC</span>
+                        <span class="logo-subtitle">Executive Private Hire</span>
+                    </a>
+                </div>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="fleet.html">Fleet</a></li>
+                    <li><a href="prices.html">Prices</a></li>
+                    <li><a href="contact.html" class="btn-contact active">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Contact & Book</h1>
+            <p>Get in touch for your luxury private hire service</p>
+        </div>
+    </section>
+
+    <!-- Contact Methods -->
+    <section class="contact-methods">
+        <div class="container">
+            <div class="methods-grid">
+                <div class="method-card">
+                    <div class="method-icon">📞</div>
+                    <h3>Call Us</h3>
+                    <p>Speak to our team 24/7</p>
+                    <a href="tel:+447501073623" class="method-link">+44 7501 073623</a>
+                </div>
+                <div class="method-card">
+                    <div class="method-icon">📧</div>
+                    <h3>Email Us</h3>
+                    <p>Send us your enquiry</p>
+                    <a href="mailto:help@wmcprivatehire.com" class="method-link">help
+                    @wmcprivatehire.com</a>
+                </div>
+                <div class="method-card">
+                    <div class="method-icon">💬</div>
+                    <h3>WhatsApp</h3>
+                    <p>Quick message booking</p>
+                    <a href="https://wa.me/447501073623" class="method-link" target="_blank" rel="noopener noreferrer">Message Us</a>
+                </div>
+                <div class="method-card">
+                    <div class="method-icon">🕐</div>
+                    <h3>24/7 Service</h3>
+                    <p>Available round the clock</p>
+                    <span class="method-link">Always Open</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Form & Map -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-grid">
+                <!-- Booking Form -->
+                <div class="booking-form-container">
+                    <h2>Book Your Journey</h2>
+                    <p class="form-intro">Fill out the form below and we'll get back to you with a quote within 30 minutes.</p>
+                    
+                    <form id="bookingForm" class="booking-form" novalidate>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="fullName">Full Name *</label>
+                                <input type="text" id="fullName" name="fullName" required aria-required="true">
+                                <span class="error-message" id="fullNameError"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required aria-required="true">
+                                <span class="error-message" id="emailError"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone Number *</label>
+                                <input type="tel" id="phone" name="phone" required aria-required="true">
+                                <span class="error-message" id="phoneError"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="vehicle">Vehicle Type *</label>
+                                <select id="vehicle" name="vehicle" required aria-required="true">
+                                    <option value="">Select Vehicle</option>
+                                    <option value="e-class">Mercedes E-Class (3 passengers)</option>
+                                    <option value="s-class">Mercedes S-Class (3 passengers)</option>
+                                    <option value="v-class">Mercedes V-Class (7 passengers)</option>
+                                </select>
+                                <span class="error-message" id="vehicleError"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="serviceType">Service Type *</label>
+                                <select id="serviceType" name="serviceType" required aria-required="true">
+                                    <option value="">Select Service</option>
+                                    <option value="airport">Airport Transfer</option>
+                                    <option value="corporate">Corporate Travel</option>
+                                    <option value="event">Special Event</option>
+                                    <option value="hourly">Hourly Hire</option>
+                                    <option value="distance">Long Distance</option>
+                                    <option value="other">Other</option>
+                                </select>
+                                <span class="error-message" id="serviceTypeError"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="passengers">Number of Passengers *</label>
+                                <input type="number" id="passengers" name="passengers" min="1" max="7" required aria-required="true">
+                                <span class="error-message" id="passengersError"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="pickupLocation">Pickup Location *</label>
+                                <input type="text" id="pickupLocation" name="pickupLocation" placeholder="e.g., Northampton NN1 1AA" required aria-required="true">
+                                <span class="error-message" id="pickupLocationError"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="dropoffLocation">Drop-off Location *</label>
+                                <input type="text" id="dropoffLocation" name="dropoffLocation" placeholder="e.g., Heathrow Airport" required aria-required="true">
+                                <span class="error-message" id="dropoffLocationError"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="pickupDate">Pickup Date *</label>
+                                <input type="date" id="pickupDate" name="pickupDate" required aria-required="true">
+                                <span class="error-message" id="pickupDateError"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="pickupTime">Pickup Time *</label>
+                                <input type="time" id="pickupTime" name="pickupTime" required aria-required="true">
+                                <span class="error-message" id="pickupTimeError"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="returnJourney">Return Journey?</label>
+                            <select id="returnJourney" name="returnJourney">
+                                <option value="no">No</option>
+                                <option value="yes">Yes - I need a return journey</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" id="returnDateGroup" style="display: none;">
+                            <label for="returnDate">Return Date</label>
+                            <input type="date" id="returnDate" name="returnDate">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="specialRequests">Special Requests</label>
+                            <textarea id="specialRequests" name="specialRequests" rows="4" placeholder="Child seats, extra luggage, flight number, etc."></textarea>
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="terms" name="terms" required aria-required="true">
+                                <span>I agree to the <a href="#" target="_blank">terms and conditions</a> *</span>
+                            </label>
+                            <span class="error-message" id="termsError"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-large btn-full">Submit Booking Request</button>
+                        
+                        <p class="form-note">* Required fields. We'll respond within 30 minutes during business hours.</p>
+                    </form>
+
+                    <div id="formSuccess" class="form-success" style="display: none;">
+                        <div class="success-icon">✓</div>
+                        <h3>Booking Request Received!</h3>
+                        <p>Thank you for your booking request. We'll contact you shortly with a confirmation and quote.</p>
+                    </div>
+                </div>
+
+                <!-- Contact Info & Map -->
+                <div class="contact-info-container">
+                    <div class="contact-details">
+                        <h2>Get In Touch</h2>
+                        <div class="contact-item">
+                            <div class="contact-item-icon">📍</div>
+                            <div>
+                                <h4>Location</h4>
+                                <p>Northampton, Northamptonshire<br>United Kingdom</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-item-icon">📞</div>
+                            <div>
+                                <h4>Phone</h4>
+                                <p><a href="tel:+447501073623">+44 7501 073623</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-item-icon">📧</div>
+                            <div>
+                                <h4>Email</h4>
+                                <p><a href="mailto:help@wmcprivatehire.com">help@wmcprivatehire.com</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-item-icon">🕐</div>
+                            <div>
+                                <h4>Hours</h4>
+                                <p>24/7 Service Available<br>Office: Mon-Fri 9am-6pm</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Google Maps -->
+                    <div class="map-container">
+                        <h3>Our Service Area</h3>
+                        <div class="map-wrapper">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d39406.85165788283!2d-0.9195!3d52.2405!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48770f1d90394a3b%3A0x2b3c5d8c8c8c8c8c!2sNorthampton%2C%20UK!5e0!3m2!1sen!2suk!4v1234567890"
+                                width="100%" 
+                                height="300" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade"
+                                title="WMC Executive Private Hire service area in Northampton, UK">
+                            </iframe>
+                        </div>
+                        <p class="map-note">We serve Northampton and surrounding areas, with airport transfers across the UK.</p>
+                    </div>
+
+                    <!-- Quick Response -->
+                    <div class="quick-response">
+                        <h3>Quick Response Guarantee</h3>
+                        <ul>
+                            <li>✓ Response within 30 minutes</li>
+                            <li>✓ Instant quote provided</li>
+                            <li>✓ Booking confirmation sent</li>
+                            <li>✓ 24/7 customer support</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Quick answers to common questions</p>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h4>How far in advance should I book?</h4>
+                    <p>We recommend booking at least 24 hours in advance, but we can accommodate same-day bookings subject to availability.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Do you provide child seats?</h4>
+                    <p>Yes, we provide complimentary child seats and booster seats. Please specify your requirements when booking.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>What if my flight is delayed?</h4>
+                    <p>We monitor all flights and adjust pickup times automatically. There's no extra charge for flight delays.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Can I cancel or modify my booking?</h4>
+                    <p>Yes, you can cancel or modify your booking free of charge up to 24 hours before the scheduled pickup time.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>What payment methods do you accept?</h4>
+                    <p>We accept cash, all major credit/debit cards, bank transfers, and PayPal. Corporate accounts are also available.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Are your drivers licensed?</h4>
+                    <p>Yes, all our chauffeurs are fully licensed private hire drivers with enhanced DBS checks and extensive experience.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>WMC Executive Private Hire</h4>
+                    <p>Premium private hire service in Northampton, offering luxury Mercedes transportation for all occasions.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="fleet.html">Our Fleet</a></li>
+                        <li><a href="prices.html">Prices</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="services.html#airport">Airport Transfers</a></li>
+                        <li><a href="services.html#corporate">Corporate Travel</a></li>
+                        <li><a href="services.html#events">Special Events</a></li>
+                        <li><a href="services.html#distance">Long Distance</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="contact-info">
+                        <li>💬 <a href="https://wa.me/447501073623" target="_blank" rel="noopener noreferrer">Message us on WhatsApp: +44 7501 073623</a></li>
+                        <li>📧 <a href="mailto:wmctransportltd@gmail.com">wmctransportltd@gmail.com</a></li>
+                        <li>📍 Northampton, UK</li>
+                        <li>🕐 24/7 Service Available</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 WMC Executive Private Hire. All rights reserved. | Licensed Private Hire Service</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/447501073623?text=Hello%2C%20I%27d%20like%20to%20book%20a%20ride" 
+       class="whatsapp-float" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       aria-label="Contact us on WhatsApp">
+        <span class="whatsapp-icon">💬</span>
+    </a>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

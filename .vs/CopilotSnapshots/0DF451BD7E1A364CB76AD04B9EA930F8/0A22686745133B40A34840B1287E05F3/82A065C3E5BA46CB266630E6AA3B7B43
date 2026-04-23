@@ -1,0 +1,274 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="About WMC Executive Private Hire - Licensed luxury taxi service in Northampton. Professional chauffeurs, Mercedes fleet, reliable airport transfers and executive car service.">
+    <meta name="keywords" content="about WMC Executive, Northampton taxi company, licensed private hire, professional chauffeurs Northampton, executive cars Northampton">
+    <title>About Us | WMC Executive Private Hire | Licensed Taxi Service Northampton</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="index.html">
+                        <span class="logo-text">WMC</span>
+                        <span class="logo-subtitle">Executive Private Hire</span>
+                    </a>
+                </div>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html" class="active">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="fleet.html">Fleet</a></li>
+                    <li><a href="prices.html">Prices</a></li>
+                    <li><a href="contact.html" class="btn-contact">Contact</a></li>
+                    <li><a href="admin/login.html" class="admin-login-link">🔒 Admin</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>About WMC Executive</h1>
+            <p>Your trusted partner for luxury private hire in Northampton</p>
+        </div>
+    </section>
+
+    <!-- About Content -->
+    <section class="about-content">
+        <div class="container">
+            <div class="about-intro">
+                <div class="about-text">
+                    <h2>Welcome to WMC Executive Private Hire</h2>
+                    <p class="lead">We are a premier licensed private hire service based in Northampton, dedicated to providing exceptional luxury transportation throughout the UK.</p>
+                    <p>At WMC Executive, we understand that travel is more than just getting from point A to point B. It's about the experience, comfort, and peace of mind that comes with knowing you're in capable hands. Our commitment to excellence has made us the preferred choice for discerning clients who demand the very best in private hire services.</p>
+                    <p>With our fleet of immaculate Mercedes vehicles and team of professional chauffeurs, we deliver a service that combines luxury, reliability, and punctuality. Whether you need an airport transfer, corporate travel, or transportation for a special event, we ensure every journey is smooth, comfortable, and memorable.</p>
+                </div>
+                <div class="about-image">
+                    <img src="images/about-luxury-car.jpeg" alt="WMC Executive Private Hire luxury Mercedes vehicle in Northampton" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Values -->
+    <section class="our-values">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Core Values</h2>
+                <p>The principles that guide everything we do</p>
+            </div>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">🎯</div>
+                    <h3>Excellence</h3>
+                    <p>We strive for perfection in every aspect of our service, from vehicle maintenance to customer care.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🤝</div>
+                    <h3>Reliability</h3>
+                    <p>Our clients trust us to be there when they need us, and we never let them down.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">💎</div>
+                    <h3>Luxury</h3>
+                    <p>We believe travel should be an experience to savor, not just endure.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🔒</div>
+                    <h3>Safety</h3>
+                    <p>Your safety is our top priority, with fully licensed drivers and comprehensive insurance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Licensed Service -->
+    <section class="licensed-service">
+        <div class="container">
+            <div class="licensed-content">
+                <div class="licensed-text">
+                    <h2>Fully Licensed Private Hire Service</h2>
+                    <p class="lead">WMC Executive Private Hire operates as a fully licensed private hire service, ensuring complete compliance with all UK regulations and standards.</p>
+                    <div class="license-features">
+                        <div class="license-item">
+                            <span class="check-icon">✓</span>
+                            <div>
+                                <h4>Licensed Drivers</h4>
+                                <p>All our chauffeurs hold valid private hire driver licenses and undergo regular background checks</p>
+                            </div>
+                        </div>
+                        <div class="license-item">
+                            <span class="check-icon">✓</span>
+                            <div>
+                                <h4>Licensed Vehicles</h4>
+                                <p>Every vehicle in our fleet is licensed for private hire and meets strict safety standards</p>
+                            </div>
+                        </div>
+                        <div class="license-item">
+                            <span class="check-icon">✓</span>
+                            <div>
+                                <h4>Full Insurance</h4>
+                                <p>Comprehensive insurance coverage for complete peace of mind</p>
+                            </div>
+                        </div>
+                        <div class="license-item">
+                            <span class="check-icon">✓</span>
+                            <div>
+                                <h4>Regular Inspections</h4>
+                                <p>Our vehicles undergo rigorous safety inspections and maintenance schedules</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="licensed-image">
+                    <img src="images/professional-chauffeur.jpg" alt="Professional licensed chauffeur providing executive private hire service in Northampton" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Chauffeurs -->
+    <section class="our-chauffeurs">
+        <div class="container">
+            <div class="section-header">
+                <h2>Professional Chauffeurs</h2>
+                <p>Experienced, courteous, and dedicated to your comfort</p>
+            </div>
+            <div class="chauffeur-content">
+                <div class="chauffeur-image">
+                    <img src="images/chauffeur-service.jpg" alt="Professional chauffeur opening door of luxury Mercedes for executive private hire in Northampton" loading="lazy">
+                </div>
+                <div class="chauffeur-text">
+                    <h3>The WMC Difference</h3>
+                    <p>Our chauffeurs are the heart of our service. Each member of our team is carefully selected and trained to deliver the highest standards of professionalism and customer care.</p>
+                    <ul class="chauffeur-qualities">
+                        <li><strong>Experienced Professionals:</strong> Years of driving experience with impeccable safety records</li>
+                        <li><strong>Local Knowledge:</strong> Extensive knowledge of Northampton and surrounding areas</li>
+                        <li><strong>Discretion:</strong> Understanding the importance of privacy and confidentiality</li>
+                        <li><strong>Presentation:</strong> Always smartly dressed and professionally presented</li>
+                        <li><strong>Customer Service:</strong> Courteous, helpful, and dedicated to your satisfaction</li>
+                        <li><strong>Punctuality:</strong> Committed to arriving on time, every time</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Commitment -->
+    <section class="our-commitment">
+        <div class="container">
+            <div class="commitment-box">
+                <h2>Our Commitment to You</h2>
+                <p class="lead">At WMC Executive Private Hire, we are committed to providing an unparalleled level of service that exceeds your expectations.</p>
+                <div class="commitment-grid">
+                    <div class="commitment-item">
+                        <h4>Comfort</h4>
+                        <p>Luxurious Mercedes vehicles with premium amenities for your ultimate comfort</p>
+                    </div>
+                    <div class="commitment-item">
+                        <h4>Punctuality</h4>
+                        <p>We understand the importance of time and guarantee prompt, reliable service</p>
+                    </div>
+                    <div class="commitment-item">
+                        <h4>Reliability</h4>
+                        <p>24/7 availability with consistent, dependable service you can count on</p>
+                    </div>
+                    <div class="commitment-item">
+                        <h4>Professionalism</h4>
+                        <p>Courteous, well-trained chauffeurs dedicated to your satisfaction</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Experience the WMC Executive Difference</h2>
+                <p>Book your luxury private hire service today</p>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn btn-primary btn-large">Book Now</a>
+                    <a href="fleet.html" class="btn btn-secondary btn-large">View Our Fleet</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>WMC Executive Private Hire</h4>
+                    <p>Premium private hire service in Northampton, offering luxury Mercedes transportation for all occasions.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="fleet.html">Our Fleet</a></li>
+                        <li><a href="prices.html">Prices</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="services.html#airport">Airport Transfers</a></li>
+                        <li><a href="services.html#corporate">Corporate Travel</a></li>
+                        <li><a href="services.html#events">Special Events</a></li>
+                        <li><a href="services.html#distance">Long Distance</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="contact-info">
+                        <li>📞 <a href="tel:+447501073623">+44 7501 073623</a></li>
+                        <li>📧 <a href="mailto:wmctransportltd@gmail.com">wmctransportltd@gmail.com</a></li>
+                        <li>📍 Northampton, UK</li>
+                        <li>🕐 24/7 Service Available</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 WMC Executive Private Hire. All rights reserved. | Licensed Private Hire Service</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/447501073623?text=Hello%2C%20I%27d%20like%20to%20book%20a%20ride" 
+       class="whatsapp-float" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       aria-label="Contact us on WhatsApp">
+        <span class="whatsapp-icon">💬</span>
+    </a>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

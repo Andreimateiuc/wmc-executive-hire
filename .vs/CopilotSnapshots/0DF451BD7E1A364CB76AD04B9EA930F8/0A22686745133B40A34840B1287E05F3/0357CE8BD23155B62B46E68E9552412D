@@ -1,0 +1,345 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WMC Executive Private Hire Services - Airport transfers Northampton, corporate travel, executive cars, special events. Professional chauffeur service to all UK airports.">
+    <meta name="keywords" content="airport transfers Northampton, executive cars Northampton, corporate travel Northampton, private hire services, chauffeur service Northampton, Heathrow transfers, Luton airport taxi">
+    <title>Services | WMC Executive Private Hire | Airport Transfers & Executive Cars Northampton</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="index.html">
+                        <span class="logo-text">WMC</span>
+                        <span class="logo-subtitle">Executive Private Hire</span>
+                    </a>
+                </div>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html" class="active">Services</a></li>
+                    <li><a href="fleet.html">Fleet</a></li>
+                    <li><a href="prices.html">Prices</a></li>
+                    <li><a href="contact.html" class="btn-contact">Contact</a></li>
+                    <li><a href="admin/login.html" class="admin-login-link">🔒 Admin</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Our Premium Services</h1>
+            <p>Luxury private hire tailored to your needs</p>
+        </div>
+    </section>
+
+    <!-- Airport Transfers -->
+    <section class="service-detail" id="airport">
+        <div class="container">
+            <div class="service-detail-content">
+                <div class="service-detail-text">
+                    <h2>Airport Transfers Northampton</h2>
+                    <p class="lead">Reliable, punctual airport transfer service to all major UK airports from Northampton and surrounding areas.</p>
+                    <p>Start your journey stress-free with our professional airport transfer service. We understand the importance of timing when it comes to flights, which is why we guarantee punctual pickups and drop-offs. Our chauffeurs monitor flight times and adjust for delays, ensuring you're never left waiting.</p>
+                    
+                    <h3>Airports We Serve:</h3>
+                    <ul class="service-list">
+                        <li><strong>Heathrow Airport</strong> - Approximately 60 miles from Northampton</li>
+                        <li><strong>Luton Airport</strong> - Approximately 30 miles from Northampton</li>
+                        <li><strong>Birmingham Airport</strong> - Approximately 50 miles from Northampton</li>
+                        <li><strong>Gatwick Airport</strong> - Approximately 90 miles from Northampton</li>
+                        <li><strong>Stansted Airport</strong> - Approximately 60 miles from Northampton</li>
+                        <li><strong>East Midlands Airport</strong> - Approximately 45 miles from Northampton</li>
+                    </ul>
+
+                    <h3>Airport Transfer Features:</h3>
+                    <ul class="service-list">
+                        <li>Flight monitoring for arrival pickups</li>
+                        <li>Meet and greet service available</li>
+                        <li>Spacious vehicles for luggage</li>
+                        <li>Child seats available on request</li>
+                        <li>Fixed prices - no hidden charges</li>
+                        <li>24/7 availability</li>
+                    </ul>
+
+                    <a href="contact.html" class="btn btn-primary">Book Airport Transfer</a>
+                </div>
+                <div class="service-detail-image">
+                    <img src="images/airport-transfer.jpg" alt="Luxury Mercedes airport transfer service from Northampton to Heathrow, Luton, Birmingham airports" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Corporate Travel -->
+    <section class="service-detail alt-bg" id="corporate">
+        <div class="container">
+            <div class="service-detail-content reverse">
+                <div class="service-detail-image">
+                    <img src="images/corporate-travel.jpg" alt="Executive corporate travel and business chauffeur service in Northampton" loading="lazy">
+                </div>
+                <div class="service-detail-text">
+                    <h2>Corporate Travel & Executive Cars</h2>
+                    <p class="lead">Professional executive car service for business travel, meetings, and corporate events in Northampton and across the UK.</p>
+                    <p>Make the right impression with our corporate travel service. Whether you're attending an important meeting, hosting clients, or need reliable transportation for your team, our executive cars provide the perfect environment for business travel.</p>
+                    
+                    <h3>Corporate Services Include:</h3>
+                    <ul class="service-list">
+                        <li><strong>Business Meetings:</strong> Arrive refreshed and on time for important meetings</li>
+                        <li><strong>Conference Transport:</strong> Reliable service for conferences and seminars</li>
+                        <li><strong>Client Entertainment:</strong> Impress clients with luxury transportation</li>
+                        <li><strong>Roadshows:</strong> Multi-stop journeys with professional service</li>
+                        <li><strong>Corporate Accounts:</strong> Flexible billing for regular business users</li>
+                        <li><strong>Executive Transfers:</strong> VIP service for senior management</li>
+                    </ul>
+
+                    <h3>Why Choose Us for Corporate Travel:</h3>
+                    <ul class="service-list">
+                        <li>Discreet, professional chauffeurs</li>
+                        <li>Immaculate Mercedes vehicles</li>
+                        <li>Wi-Fi available in vehicles</li>
+                        <li>Bottled water and refreshments</li>
+                        <li>Flexible booking and cancellation</li>
+                        <li>Detailed invoicing for expenses</li>
+                    </ul>
+
+                    <a href="contact.html" class="btn btn-primary">Enquire About Corporate Services</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Events -->
+    <section class="service-detail" id="events">
+        <div class="container">
+            <div class="service-detail-content">
+                <div class="service-detail-text">
+                    <h2>Special Events & Occasions</h2>
+                    <p class="lead">Make your special day even more memorable with our luxury private hire service for weddings, proms, and celebrations.</p>
+                    <p>Every special occasion deserves special transportation. Our elegant Mercedes fleet adds a touch of luxury to your important events, ensuring you arrive in style and comfort.</p>
+                    
+                    <h3>Events We Cater For:</h3>
+                    <ul class="service-list">
+                        <li><strong>Weddings:</strong> Elegant transport for the bride, groom, and wedding party</li>
+                        <li><strong>Proms:</strong> Safe, stylish transportation for prom night</li>
+                        <li><strong>Anniversaries:</strong> Celebrate in luxury with our premium service</li>
+                        <li><strong>Theatre & Concerts:</strong> Enjoy your evening without parking worries</li>
+                        <li><strong>Sporting Events:</strong> Arrive at major sporting venues in comfort</li>
+                        <li><strong>Private Parties:</strong> Group transportation for celebrations</li>
+                    </ul>
+
+                    <h3>Special Event Features:</h3>
+                    <ul class="service-list">
+                        <li>Decorated vehicles available for weddings</li>
+                        <li>Red carpet service on request</li>
+                        <li>Champagne service available</li>
+                        <li>Flexible timing for your schedule</li>
+                        <li>Multiple vehicle bookings for groups</li>
+                        <li>Professional, courteous service</li>
+                    </ul>
+
+                    <a href="contact.html" class="btn btn-primary">Book for Special Event</a>
+                </div>
+                <div class="service-detail-image">
+                    <img src="images/special-events.jpg" alt="Luxury Mercedes wedding car and special event transportation in Northampton" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Long Distance -->
+    <section class="service-detail alt-bg" id="distance">
+        <div class="container">
+            <div class="service-detail-content reverse">
+                <div class="service-d
+                    <img src="images/long-distance.jpg" alt="Comfortable long distance private hire travel across UK from Northampton" loading="lazy">
+                </div>
+                <div class="service-detail-text">
+                    <h2>Long Distance Journeys</h2>
+                    <p class="lead">Comfortable, reliable long-distance travel across the UK with experienced chauffeurs and luxury Mercedes vehicles.</p>
+                    <p>Whether you're traveling for business or pleasure, our long-distance service ensures you arrive relaxed and refreshed. Our experienced chauffeurs know the best routes and our comfortable vehicles make even the longest journeys enjoyable.</p>
+                    
+                    <h3>Long Distance Services:</h3>
+                    <ul class="service-list">
+                        <li><strong>UK-Wide Travel:</strong> Journeys to any destination across the UK</li>
+                        <li><strong>Multi-Day Hire:</strong> Extended bookings for tours and business trips</li>
+                        <li><strong>Coastal Transfers:</strong> Travel to ports for cruise departures</li>
+                        <li><strong>University Runs:</strong> Student transportation to universities nationwide</li>
+                        <li><strong>Relocation Assistance:</strong> Comfortable travel during moves</li>
+                        <li><strong>Sightseeing Tours:</strong> Customized tours of UK attractions</li>
+                    </ul>
+
+                    <h3>Long Distance Benefits:</h3>
+                    <ul class="service-list">
+                        <li>Experienced drivers with excellent route knowledge</li>
+                        <li>Regular comfort breaks on longer journeys</li>
+                        <li>Spacious vehicles with ample luggage capacity</li>
+                        <li>Competitive fixed rates for long distances</li>
+                        <li>Flexible departure times</li>
+                        <li>Door-to-door service</li>
+                    </ul>
+
+                    <a href="contact.html" class="btn btn-primary">Plan Your Journey</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Additional Services -->
+    <section class="additional-services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Additional Services</h2>
+                <p>Going the extra mile for our clients</p>
+            </div>
+            <div class="additional-grid">
+                <div class="additional-card">
+                    <div class="additional-icon">🎓</div>
+                    <h3>School Runs</h3>
+                    <p>Safe, reliable transportation for school children with DBS-checked drivers</p>
+                </div>
+                <div class="additional-card">
+                    <div class="additional-icon">🏥</div>
+                    <h3>Medical Appointments</h3>
+                    <p>Comfortable transport to hospitals and medical facilities</p>
+                </div>
+                <div class="additional-card">
+                    <div class="additional-icon">🛍️</div>
+                    <h3>Shopping Trips</h3>
+                    <p>Personal shopping assistance with door-to-door service</p>
+                </div>
+                <div class="additional-card">
+                    <div class="additional-icon">🌙</div>
+                    <h3>Night Out Service</h3>
+                    <p>Safe transportation for evenings out in Northampton and beyond</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Features -->
+    <section class="service-features">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Makes Our Service Special</h2>
+                <p>The WMC Executive advantage</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-box">
+                    <h3>24/7 Availability</h3>
+                    <p>Round-the-clock service for early morning flights and late-night returns</p>
+                </div>
+                <div class="feature-box">
+                    <h3>Fixed Pricing</h3>
+                    <p>Transparent rates with no hidden charges or surge pricing</p>
+                </div>
+                <div class="feature-box">
+                    <h3>Flight Monitoring</h3>
+                    <p>We track your flight and adjust pickup times for delays</p>
+                </div>
+                <div class="feature-box">
+                    <h3>Meet & Greet</h3>
+                    <p>Chauffeur meets you at arrivals with name board</p>
+                </div>
+                <div class="feature-box">
+                    <h3>Child Seats</h3>
+                    <p>Complimentary child seats available on request</p>
+                </div>
+                <div class="feature-box">
+                    <h3>Luggage Assistance</h3>
+                    <p>Help with loading and unloading your luggage</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Book Your Journey?</h2>
+                <p>Contact us today for a quote or to make a reservation</p>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn btn-primary btn-large">Book Now</a>
+                    <a href="tel:+447501073623" class="btn btn-secondary btn-large">Call Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>WMC Executive Private Hire</h4>
+                    <p>Premium private hire service in Northampton, offering luxury Mercedes transportation for all occasions.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="fleet.html">Our Fleet</a></li>
+                        <li><a href="prices.html">Prices</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="services.html#airport">Airport Transfers</a></li>
+                        <li><a href="services.html#corporate">Corporate Travel</a></li>
+                        <li><a href="services.html#events">Special Events</a></li>
+                        <li><a href="services.html#distance">Long Distance</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="contact-info">
+                        <li>📞 <a href="tel:+447501073623">+44 1604 XXXXXX</a></li>
+                        <li>📧 <a href="mailto:wmctransportltd@gmail.com">wmctransportltd@gmail.com</a></li>
+                        <li>📍 Northampton, UK</li>
+                        <li>🕐 24/7 Service Available</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 WMC Executive Private Hire. All rights reserved. | Licensed Private Hire Service</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/441604XXXXXX?text=Hello%2C%20I%27d%20like%20to%20book%20a%20ride" 
+       class="whatsapp-float" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       aria-label="Contact us on WhatsApp">
+        <span class="whatsapp-icon">💬</span>
+    </a>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
