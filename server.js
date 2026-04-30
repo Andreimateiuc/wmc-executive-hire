@@ -29,6 +29,7 @@ try {
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+let databaseAvailable = false;
 
 // ============================================
 // SECURITY MIDDLEWARE
@@ -132,17 +133,17 @@ app.use('/api/admin', adminRoutes);
 app.get('/api/health', async (req, res) => {
     try {
         // Check database connection
-        const dbConnected = await db.testConnection();
+        databaseAvailable = await db.testConnection();
         
         // Get cache stats
         const cacheStats = cache.getStats();
-        
-        res.json({
-            status: 'OK',
+
+        const payload = {
+            status: databaseAvailable ? 'OK' : 'DEGRADED',
             timestamp: new Date().toISOString(),
             uptime: process.uptime(),
             environment: process.env.NODE_ENV || 'development',
-            database: dbConnected ? 'connected' : 'disconnected',
+            database: databaseAvailable ? 'connected' : 'disconnected',
             cache: {
                 enabled: process.env.CACHE_ENABLED === 'true',
                 stats: cacheStats
@@ -152,7 +153,9 @@ app.get('/api/health', async (req, res) => {
                 total: Math.round(process.memoryUsage().heapTotal / 1024 / 1024) + ' MB'
             },
             version: require('./package.json').version
-        });
+        };
+        
+        res.status(databaseAvailable ? 200 : 503).json(payload);
     } catch (error) {
         logger.logError(error);
         res.status(503).json({
@@ -318,16 +321,15 @@ let server;
 async function startServer() {
     try {
         // Test database connection
-        const dbConnected = await db.testConnection();
-        
-        if (!dbConnected) {
-            logger.error('Failed to connect to database. Please check your configuration.');
-            console.error('\n❌ Database connection failed!');
+        databaseAvailable = await db.testConnection();
+
+        if (!databaseAvailable) {
+            logger.warn('Database connection failed during startup. Serving static pages in degraded mode until the database becomes available.');
+            console.error('\n⚠️ Database connection failed. Starting in degraded mode.');
             console.log('\nMake sure to:');
-            console.log('1. Copy .env.example to .env');
-            console.log('2. Configure database settings in .env');
-            console.log('3. Run: npm run init-db\n');
-            process.exit(1);
+            console.log('1. Configure database settings in your hosting environment');
+            console.log('2. Verify the MySQL server is reachable from the app');
+            console.log('3. Recheck /api/health after updating the database config\n');
         }
         
         // Start server
@@ -340,7 +342,7 @@ async function startServer() {
             console.log(`🔧 Admin Panel: http://localhost:${PORT}/admin`);
             console.log(`📊 API Health: http://localhost:${PORT}/api/health`);
             console.log(`\n📝 Environment: ${process.env.NODE_ENV || 'development'}`);
-            console.log(`💾 Database: ${process.env.DB_NAME || 'wmc_executive_hire'}`);
+            console.log(`💾 Database: ${databaseAvailable ? 'Connected' : 'Disconnected (degraded mode)'}`);
             console.log(`🔒 Security: Enhanced`);
             console.log(`📦 Cache: ${process.env.CACHE_ENABLED === 'true' ? 'Enabled' : 'Disabled'}`);
             console.log(`📝 Logging: ${process.env.LOG_LEVEL || 'info'}\n`);
@@ -348,7 +350,8 @@ async function startServer() {
             logger.info('Server started successfully', {
                 port: PORT,
                 environment: process.env.NODE_ENV || 'development',
-                nodeVersion: process.version
+                nodeVersion: process.version,
+                databaseAvailable
             });
         });
         

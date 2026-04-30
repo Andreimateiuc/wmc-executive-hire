@@ -99,9 +99,6 @@ const sanitizeInput = [
 // Validate required environment variables
 const validateEnvVars = () => {
     const required = [
-        'DB_HOST',
-        'DB_USER',
-        'DB_NAME',
         'JWT_SECRET',
         'SESSION_SECRET'
     ];
@@ -111,6 +108,13 @@ const validateEnvVars = () => {
     if (missing.length > 0) {
         logger.error('Missing required environment variables:', missing);
         throw new Error(`Missing required environment variables: ${missing.join(', ')}`);
+    }
+
+    const missingDbConfig = ['DB_HOST', 'DB_USER', 'DB_NAME'].filter(key => !process.env[key]);
+    if (missingDbConfig.length > 0) {
+        logger.warn('Database environment variables are missing. API routes may be unavailable until database settings are configured.', {
+            missing: missingDbConfig
+        });
     }
 
     // Warn about default values
