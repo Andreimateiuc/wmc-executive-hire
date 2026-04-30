@@ -222,7 +222,7 @@ npm run deploy        # Deploy to Heroku
 - Check health endpoint
 
 ### Business Contact:
-- **Email:** wmctransportltd@gmail.com
+- **Email:** help@wmcprivatehire.com
 - **Phone:** +44 7501 073623
 
 ---

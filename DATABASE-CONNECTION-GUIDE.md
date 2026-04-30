@@ -34,7 +34,7 @@ EMAIL_SECURE=false
 EMAIL_USER=your_email@gmail.com
 EMAIL_PASSWORD=your_gmail_app_password_here
 EMAIL_FROM=WMC Executive Private Hire <your_email@gmail.com>
-EMAIL_TO=wmctransportltd@gmail.com
+EMAIL_TO=help@wmcprivatehire.com
 
 # Admin Dashboard - CHANGE THESE!
 ADMIN_USERNAME=admin

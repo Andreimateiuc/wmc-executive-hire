@@ -186,59 +186,31 @@ document.addEventListener('DOMContentLoaded', function() {
                     specialRequests: document.getElementById('specialRequests').value.trim()
                 };
                 
-                // Show loading state
                 const submitButton = bookingForm.querySelector('button[type="submit"]');
                 const originalButtonText = submitButton.textContent;
-                submitButton.textContent = 'Submitting...';
+                submitButton.textContent = 'Opening WhatsApp...';
                 submitButton.disabled = true;
-                
-                // Send to API
-                fetch('/api/bookings', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(formData)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        // Hide form and show success message
-                        bookingForm.style.display = 'none';
-                        const formSuccess = document.getElementById('formSuccess');
-                        if (formSuccess) {
-                            formSuccess.style.display = 'block';
-                            // Update success message with booking reference
-                            const successMessage = formSuccess.querySelector('p');
-                            if (successMessage && data.data.bookingReference) {
-                                successMessage.innerHTML = `Thank you for your booking request. Your booking reference is <strong>${data.data.bookingReference}</strong>. We'll contact you shortly with a confirmation and quote.`;
-                            }
-                        }
-                        
-                        // Scroll to success message
-                        formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        
-                        // Reset form after a delay
-                        setTimeout(() => {
-                            bookingForm.reset();
-                            bookingForm.style.display = 'block';
-                            formSuccess.style.display = 'none';
-                            submitButton.textContent = originalButtonText;
-                            submitButton.disabled = false;
-                        }, 10000);
-                    } else {
-                        // Show error message
-                        alert('Failed to submit booking. Please try again or call us directly.');
-                        submitButton.textContent = originalButtonText;
-                        submitButton.disabled = false;
-                    }
-                })
-                .catch(error => {
-                    console.error('Booking submission error:', error);
-                    alert('Failed to submit booking. Please try again or call us directly at +44 7501 073623');
+
+                const bookingMessage = buildWhatsAppBookingMessage(formData);
+                const whatsappUrl = `https://wa.me/447501073623?text=${encodeURIComponent(bookingMessage)}`;
+                const whatsappWindow = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+
+                if (!whatsappWindow) {
+                    window.location.href = whatsappUrl;
+                }
+
+                const formSuccess = document.getElementById('formSuccess');
+                if (formSuccess) {
+                    formSuccess.style.display = 'block';
+                    formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+
+                showBookingNotification();
+
+                setTimeout(() => {
                     submitButton.textContent = originalButtonText;
                     submitButton.disabled = false;
-                });
+                }, 1200);
             } else {
                 // Scroll to first error
                 const firstError = document.querySelector('.error-message:not(:empty)');
@@ -255,6 +227,73 @@ document.addEventListener('DOMContentLoaded', function() {
         if (errorElement) {
             errorElement.textContent = message;
         }
+    }
+
+    function buildWhatsAppBookingMessage(formData) {
+        const vehicleLabels = {
+            'e-class': 'Mercedes E-Class / Comfort',
+            's-class': 'Mercedes S-Class / Executive',
+            'v-class': 'Mercedes V-Class / Executive MPV'
+        };
+        const serviceLabels = {
+            airport: 'Airport Transfer',
+            corporate: 'Corporate Travel',
+            event: 'Special Event',
+            hourly: 'Hourly Hire',
+            distance: 'Long Distance',
+            other: 'Other'
+        };
+        const returnDetails = formData.returnJourney === 'yes'
+            ? `Yes${formData.returnDate ? ` - ${formData.returnDate}` : ''}`
+            : 'No';
+
+        return [
+            'Hello WMC Executive Private Hire, I would like to request a booking.',
+            '',
+            `Name: ${formData.fullName}`,
+            `Email: ${formData.email}`,
+            `Phone: ${formData.phone}`,
+            `Vehicle: ${vehicleLabels[formData.vehicle] || formData.vehicle}`,
+            `Service: ${serviceLabels[formData.serviceType] || formData.serviceType}`,
+            `Passengers: ${formData.passengers}`,
+            `Pickup: ${formData.pickupLocation}`,
+            `Drop-off: ${formData.dropoffLocation}`,
+            `Date: ${formData.pickupDate}`,
+            `Time: ${formData.pickupTime}`,
+            `Return journey: ${returnDetails}`,
+            `Special requests: ${formData.specialRequests || 'None'}`,
+            '',
+            'Please reply on WhatsApp with availability and quote.'
+        ].join('\n');
+    }
+
+    function showBookingNotification() {
+        const existingNotification = document.querySelector('.booking-whatsapp-toast');
+        if (existingNotification) {
+            existingNotification.remove();
+        }
+
+        const notification = document.createElement('div');
+        notification.className = 'booking-whatsapp-toast';
+        notification.setAttribute('role', 'status');
+        notification.innerHTML = `
+            <div class="booking-whatsapp-toast-icon">✓</div>
+            <div>
+                <strong>WhatsApp booking ready</strong>
+                <p>Send the message, then wait for our reply on WhatsApp.</p>
+            </div>
+        `;
+
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+            notification.classList.add('is-visible');
+        }, 50);
+
+        setTimeout(() => {
+            notification.classList.remove('is-visible');
+            setTimeout(() => notification.remove(), 300);
+        }, 7000);
     }
     
     // Set minimum date for date inputs to today

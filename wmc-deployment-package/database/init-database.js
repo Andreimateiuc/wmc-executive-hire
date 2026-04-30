@@ -51,7 +51,7 @@ async function initializeDatabase() {
             await connection.query(
                 `INSERT INTO admin_users (username, password_hash, email, full_name, role) 
                  VALUES (?, ?, ?, ?, ?)`,
-                [adminUsername, hashedPassword, 'admin@wmcexecutive.co.uk', 'System Administrator', 'admin']
+                [adminUsername, hashedPassword, 'help@wmcprivatehire.com', 'System Administrator', 'admin']
             );
             console.log('✓ Default admin user created');
             console.log(`  Username: ${adminUsername}`);

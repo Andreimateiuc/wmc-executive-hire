@@ -51,7 +51,7 @@ A modern, elegant website for WMC Executive Private Hire - a luxury private hire
 
 2. **Update Contact Information**: Replace placeholder phone numbers and email addresses:
    - Search for `+441604XXXXXX` and replace with your actual phone number
-   - Search for `info@wmcexecutive.co.uk` and replace with your actual email
+   - Search for `help@wmcprivatehire.com` and replace with your actual email
 
 3. **Update Google Maps**: In `contact.html`, update the Google Maps embed URL with your actual location coordinates
 

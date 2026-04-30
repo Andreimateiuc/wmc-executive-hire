@@ -29,7 +29,7 @@ npm run add-admin
 **Example:**
 ```
 Enter username: john_admin
-Enter email: john@wmcexecutive.co.uk
+Enter email: help@wmcprivatehire.com
 Enter full name: John Smith
 Enter password: ********
 Confirm password: ********
@@ -57,7 +57,7 @@ Found 2 admin user(s):
 1. System Administrator
    ID: 1
    Username: admin
-   Email: admin@wmcexecutive.co.uk
+   Email: help@wmcprivatehire.com
    Role: admin
    Status: ✅ Active
    Last Login: 2024-12-15 10:30:00
@@ -66,7 +66,7 @@ Found 2 admin user(s):
 2. John Smith
    ID: 2
    Username: john_admin
-   Email: john@wmcexecutive.co.uk
+   Email: help@wmcprivatehire.com
    Role: admin
    Status: ✅ Active
    Last Login: Never
@@ -95,14 +95,14 @@ npm run delete-admin
 ```
 Current admin users:
 
-1. admin (admin@wmcexecutive.co.uk) - System Administrator [Role: admin]
-2. john_admin (john@wmcexecutive.co.uk) - John Smith [Role: admin]
+1. admin (help@wmcprivatehire.com) - System Administrator [Role: admin]
+2. john_admin (help@wmcprivatehire.com) - John Smith [Role: admin]
 
 Enter username to delete (or "cancel" to exit): john_admin
 
 ⚠️  You are about to delete:
    Username: john_admin
-   Email: john@wmcexecutive.co.uk
+   Email: help@wmcprivatehire.com
    Full Name: John Smith
 
 ⚠️  This action cannot be undone!
@@ -119,7 +119,7 @@ When you run `npm run init-db`, a default admin user is created:
 **Default Credentials:**
 - Username: `admin`
 - Password: (shown in terminal after init-db)
-- Email: `admin@wmcexecutive.co.uk`
+- Email: `help@wmcprivatehire.com`
 - Role: `admin`
 
 **⚠️ IMPORTANT:** Change the default password immediately after first login!
@@ -172,7 +172,7 @@ npm run add-admin
 
 # Example: Add manager
 Username: manager_sarah
-Email: sarah@wmcexecutive.co.uk
+Email: help@wmcprivatehire.com
 Full Name: Sarah Johnson
 Password: ********
 ```

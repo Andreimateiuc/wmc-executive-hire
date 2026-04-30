@@ -295,7 +295,7 @@
 
 2. **Contact Information:**
    - Replace placeholder phone: +441604XXXXXX
-   - Replace placeholder email: info@wmcexecutive.co.uk
+   - Replace placeholder email: help@wmcprivatehire.com
    - Update Google Maps coordinates
 
 3. **Backend Setup:**

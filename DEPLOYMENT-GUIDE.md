@@ -107,7 +107,7 @@ EMAIL_SECURE=false
 EMAIL_USER=your_email@gmail.com
 EMAIL_PASSWORD=your_app_specific_password
 EMAIL_FROM=WMC Executive Private Hire <your_email@gmail.com>
-EMAIL_TO=wmctransportltd@gmail.com
+EMAIL_TO=help@wmcprivatehire.com
 
 # Admin Dashboard
 ADMIN_USERNAME=admin
@@ -250,7 +250,7 @@ heroku config:set EMAIL_PORT=587
 heroku config:set EMAIL_USER=your_email@gmail.com
 heroku config:set EMAIL_PASSWORD=your_app_password
 heroku config:set EMAIL_FROM="WMC Executive <your_email@gmail.com>"
-heroku config:set EMAIL_TO=wmctransportltd@gmail.com
+heroku config:set EMAIL_TO=help@wmcprivatehire.com
 heroku config:set ADMIN_USERNAME=admin
 heroku config:set ADMIN_PASSWORD=SecurePassword123!
 heroku config:set JWT_SECRET=$(openssl rand -base64 32)
@@ -578,7 +578,7 @@ SELECT * FROM admin_users;
 ## Support
 
 For issues or questions:
-- Email: wmctransportltd@gmail.com
+- Email: help@wmcprivatehire.com
 - Phone: +44 7501 073623
 
 ---

@@ -83,7 +83,7 @@ DB_NAME=wmc_executive_hire
 # Email (use Gmail)
 EMAIL_USER=your_email@gmail.com
 EMAIL_PASSWORD=your_gmail_app_password
-EMAIL_TO=wmctransportltd@gmail.com
+EMAIL_TO=help@wmcprivatehire.com
 
 # Admin (change these!)
 ADMIN_USERNAME=admin
@@ -244,7 +244,7 @@ POST   /api/admin/change-password          # Change password
 **In HTML files:**
 Search and replace:
 - `+447501073623` → Your phone number
-- `wmctransportltd@gmail.com` → Your email
+- `help@wmcprivatehire.com` → Your email
 
 **In .env file:**
 ```env
@@ -516,7 +516,7 @@ FLUSH PRIVILEGES;
 
 **Business Contact:**
 - Phone: +44 7501 073623
-- Email: wmctransportltd@gmail.com
+- Email: help@wmcprivatehire.com
 - WhatsApp: [Message Us](https://wa.me/447501073623)
 
 **Technical Issues:**

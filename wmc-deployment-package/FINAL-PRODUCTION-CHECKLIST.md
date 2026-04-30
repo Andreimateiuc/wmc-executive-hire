@@ -282,7 +282,7 @@ Your deployment is successful when:
 - Domain Registrar: [Registrar support]
 
 **Business Contacts:**
-- Email: wmctransportltd@gmail.com
+- Email: help@wmcprivatehire.com
 - Phone: +44 7501 073623
 
 ---

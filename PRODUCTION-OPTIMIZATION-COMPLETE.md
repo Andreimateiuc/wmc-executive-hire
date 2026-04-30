@@ -367,7 +367,7 @@ Your application is now ready for deployment on:
 - Consult documentation
 
 **Business Support:**
-- Email: wmctransportltd@gmail.com
+- Email: help@wmcprivatehire.com
 - Phone: +44 7501 073623
 
 ---

@@ -2,7 +2,7 @@
 
 ## Updated Contact Details:
 
-**Email:** wmctransportltd@gmail.com
+**Email:** help@wmcprivatehire.com
 **Phone:** +44 7501 073623
 **WhatsApp:** +44 7501 073623
 

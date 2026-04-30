@@ -228,7 +228,7 @@ Your package includes:
 - `FINAL-PRODUCTION-CHECKLIST.md` - Verification
 
 ### Business Contact:
-- **Email:** wmctransportltd@gmail.com
+- **Email:** help@wmcprivatehire.com
 - **Phone:** +44 7501 073623
 
 ---
