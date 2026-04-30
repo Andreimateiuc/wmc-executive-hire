@@ -268,26 +268,36 @@ app.use((err, req, res, next) => {
 
 const gracefulShutdown = async (signal) => {
     logger.info(`${signal} received. Starting graceful shutdown...`);
-    
+
+    const finalizeShutdown = async () => {
+        try {
+            await db.pool.end();
+            logger.info('Database connections closed');
+        } catch (error) {
+            logger.error('Error closing database connections:', error);
+        }
+
+        try {
+            cache.flush();
+            logger.info('Cache cleared');
+        } catch (error) {
+            logger.error('Error clearing cache:', error);
+        }
+    };
+
+    if (!server) {
+        await finalizeShutdown();
+        process.exit(signal === 'uncaughtException' ? 1 : 0);
+        return;
+    }
+
     // Stop accepting new connections
     server.close(async () => {
         logger.info('HTTP server closed');
         
-        try {
-            // Close database connections
-            await db.pool.end();
-            logger.info('Database connections closed');
-            
-            // Clear cache
-            cache.flush();
-            logger.info('Cache cleared');
-            
-            logger.info('Graceful shutdown completed');
-            process.exit(0);
-        } catch (error) {
-            logger.error('Error during shutdown:', error);
-            process.exit(1);
-        }
+        await finalizeShutdown();
+        logger.info('Graceful shutdown completed');
+        process.exit(signal === 'uncaughtException' ? 1 : 0);
     });
     
     // Force shutdown after 30 seconds
