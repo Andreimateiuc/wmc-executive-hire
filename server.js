@@ -155,7 +155,7 @@ app.get('/api/health', async (req, res) => {
             version: require('./package.json').version
         };
         
-        res.status(databaseAvailable ? 200 : 503).json(payload);
+        res.status(200).json(payload);
     } catch (error) {
         logger.logError(error);
         res.status(503).json({
