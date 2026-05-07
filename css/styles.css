@@ -1977,6 +1977,36 @@ section {
     color: var(--color-silver);
 }
 
+.footer-licensing {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(201, 169, 97, 0.2);
+}
+
+.footer-licensing p {
+    margin: 0.4rem 0;
+    font-size: 0.95rem;
+    color: var(--color-white);
+    letter-spacing: 0.3px;
+}
+
+.footer-licensing strong {
+    color: var(--color-gold-light);
+    font-weight: 700;
+}
+
+.footer-licensed-by {
+    font-size: 0.85rem !important;
+    color: var(--color-silver) !important;
+    margin-top: 0.6rem !important;
+}
+
+.footer-copyright {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--color-medium-gray);
+}
+
 /* WhatsApp Floating Button */
 .whatsapp-float {
     position: fixed;
