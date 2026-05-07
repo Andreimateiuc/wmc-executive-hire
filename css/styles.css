@@ -838,6 +838,91 @@ section {
     color: var(--color-silver);
 }
 
+/* Strategic Partnership */
+.strategic-partnership {
+    padding: 5rem 0;
+    background-color: var(--color-light-gray);
+}
+
+.partnership-intro {
+    font-size: 1.1rem;
+    color: var(--color-medium-gray);
+    font-style: italic;
+    margin-bottom: 0;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.partnership-content {
+    margin-top: 3rem;
+}
+
+.partnership-content h3 {
+    text-align: center;
+    font-size: 1.8rem;
+    color: var(--color-black);
+    margin-bottom: 2.5rem;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.benefits-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+}
+
+.benefit-card {
+    background: linear-gradient(180deg, #ffffff, #fbfbfb);
+    padding: 2.25rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(212, 175, 55, 0.14);
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.benefit-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+    opacity: 0.8;
+}
+
+.benefit-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 22px 52px rgba(0, 0, 0, 0.13);
+    border-color: rgba(212, 175, 55, 0.28);
+}
+
+.benefit-card-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    display: block;
+    filter: drop-shadow(0 8px 16px rgba(212, 175, 55, 0.15));
+}
+
+.benefit-card h4 {
+    color: var(--color-black);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.benefit-card p {
+    color: var(--color-medium-gray);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
 /* Services Page */
 .service-detail {
     padding: 5rem 0;
