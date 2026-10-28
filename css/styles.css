@@ -2417,3 +2417,20 @@ textarea:focus {
         scroll-behavior: auto !important;
     }
 }
+
+/* Mobile: stack logo text and subtitle so they don't overlap/wrap */
+@media (max-width: 768px) {
+    .logo a {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+    }
+    .logo-text {
+        font-size: 1.6rem;
+    }
+    .logo-subtitle {
+        font-size: 0.6rem;
+        letter-spacing: 2px;
+        white-space: nowrap;
+    }
+}
