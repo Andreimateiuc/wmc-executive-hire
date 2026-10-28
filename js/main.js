@@ -238,7 +238,7 @@ document.addEventListener('DOMContentLoaded', function() {
             'tesla-model-s': 'Tesla Model S / Electric',
             'tesla-model-y': 'Tesla Model Y / Electric SUV',
             'standard-skoda-superb': 'Skoda Superb / Standard',
-            'standard-toyota-corolla': 'Toyota Corolla / Standard',
+            'standard-toyota-corolla': 'Toyota Corolla Estate / Standard',
             'standard-mercedes-c-class': 'Mercedes C-Class / Standard'
         };
         const serviceLabels = {

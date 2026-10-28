@@ -118,7 +118,7 @@ INSERT INTO vehicles (name, type, capacity, description, features, image_url) VA
 ('Tesla Model S', 'tesla-model-s', 4, 'Premium electric executive car with spacious cabin and zero emissions', 'Electric drive, Panoramic glass roof, Rear touchscreen, Premium audio, USB-C charging', 'images/tesla-model-s.jpg'),
 ('Tesla Model Y', 'tesla-model-y', 4, 'Black, fully electric SUV with extra luggage space and zero emissions', 'Electric drive, Panoramic glass roof, Raised SUV seating, Large boot, USB-C charging', 'images/tesla-model-y.jpg'),
 ('Skoda Superb', 'standard-skoda-superb', 4, 'Standard: black, spacious and affordable saloon for everyday, airport and station runs', 'Large boot, Generous legroom, Climate control, USB charging', 'images/skoda-superb.jpg'),
-('Toyota Corolla', 'standard-toyota-corolla', 4, 'Standard: black, reliable hybrid saloon for everyday, airport and station runs', 'Hybrid drive, Climate control, USB charging', 'images/toyota-corolla.jpg'),
+('Toyota Corolla Estate', 'standard-toyota-corolla', 4, 'Standard: black, reliable hybrid estate (Touring Sports) with extra boot space for everyday, airport and station runs', 'Hybrid drive, Climate control, USB charging', 'images/toyota-corolla.jpg'),
 ('Mercedes C-Class', 'standard-mercedes-c-class', 3, 'Standard: black, latest-generation Mercedes saloon at an affordable level', 'Leather seating, Climate control, USB charging', 'images/mercedes-c-class.jpg');
 
 -- Insert default services
