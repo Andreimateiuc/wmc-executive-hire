@@ -57,6 +57,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const returnDateGroup = document.getElementById('returnDateGroup');
         const returnDate = document.getElementById('returnDate');
         
+        const serviceTypeSel = document.getElementById('serviceType');
+        const flightGroup = document.getElementById('flightDetailsGroup');
+        if (serviceTypeSel && flightGroup) {
+            const toggleFlight = () => { flightGroup.style.display = serviceTypeSel.value === 'airport' ? 'block' : 'none'; };
+            serviceTypeSel.addEventListener('change', toggleFlight);
+            toggleFlight();
+        }
         if (returnJourney && returnDateGroup) {
             returnJourney.addEventListener('change', function() {
                 if (this.value === 'yes') {
@@ -183,7 +190,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     pickupTime: pickupTime.value,
                     returnJourney: returnJourney.value,
                     returnDate: returnDate.value || null,
-                    specialRequests: document.getElementById('specialRequests').value.trim()
+                    specialRequests: document.getElementById('specialRequests').value.trim(),
+                    flight: (() => { const v = id => (document.getElementById(id) || {}).value || ''; return document.getElementById('serviceType').value === 'airport' ? { direction: v('flightDirection'), number: v('flightNumber').trim(), airport: v('airport'), terminal: v('terminal').trim(), time: v('flightTime'), fromTo: v('flyingFrom').trim(), luggage: v('luggage'), meetGreet: v('meetGreet') } : null; })()
                 };
                 
                 const submitButton = bookingForm.querySelector('button[type="submit"]');
@@ -267,6 +275,19 @@ document.addEventListener('DOMContentLoaded', function() {
             `Date: ${formData.pickupDate}`,
             `Time: ${formData.pickupTime}`,
             `Return journey: ${returnDetails}`,
+            ...(formData.flight ? [
+                '',
+                'Flight details:',
+                `- ${formData.flight.direction || 'Not specified'}`,
+                `- Flight number: ${formData.flight.number || 'Not provided'}`,
+                `- Airport: ${formData.flight.airport || 'Not provided'}`,
+                `- Terminal: ${formData.flight.terminal || 'Not provided'}`,
+                `- Scheduled time: ${formData.flight.time || 'Not provided'}`,
+                `- Flying from/to: ${formData.flight.fromTo || 'Not provided'}`,
+                `- Suitcases: ${formData.flight.luggage || 'Not provided'}`,
+                `- Meet & Greet: ${formData.flight.meetGreet}`,
+                ''
+            ] : []),
             `Special requests: ${formData.specialRequests || 'None'}`,
             '',
             'Please reply on WhatsApp with availability and quote.'

@@ -141,6 +141,58 @@
                                 </select>
                                 <span class="error-message" id="serviceTypeError"></span>
                             </div>
+                            <div id="flightDetailsGroup" style="display: none; grid-column: 1 / -1;">
+                                <h3 style="margin: 10px 0 15px;">Flight Details</h3>
+                                <div class="form-group">
+                                    <label for="flightDirection">Are you arriving or departing?</label>
+                                    <select id="flightDirection" name="flightDirection">
+                                        <option value="">Select</option>
+                                        <option value="Arriving (pickup from airport)">Arriving – pickup from airport</option>
+                                        <option value="Departing (drop-off at airport)">Departing – drop-off at airport</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="flightNumber">Flight Number</label>
+                                    <input type="text" id="flightNumber" name="flightNumber" placeholder="e.g. BA 117">
+                                </div>
+                                <div class="form-group">
+                                    <label for="airport">Airport</label>
+                                    <select id="airport" name="airport">
+                                        <option value="">Select Airport</option>
+                                        <option>London Heathrow (LHR)</option>
+                                        <option>London Luton (LTN)</option>
+                                        <option>Birmingham (BHX)</option>
+                                        <option>London Gatwick (LGW)</option>
+                                        <option>London Stansted (STN)</option>
+                                        <option>East Midlands (EMA)</option>
+                                        <option>London City (LCY)</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="terminal">Terminal</label>
+                                    <input type="text" id="terminal" name="terminal" placeholder="e.g. Terminal 5">
+                                </div>
+                                <div class="form-group">
+                                    <label for="flightTime">Scheduled Landing / Departure Time</label>
+                                    <input type="time" id="flightTime" name="flightTime">
+                                </div>
+                                <div class="form-group">
+                                    <label for="flyingFrom">Flying From / To</label>
+                                    <input type="text" id="flyingFrom" name="flyingFrom" placeholder="e.g. Dubai">
+                                </div>
+                                <div class="form-group">
+                                    <label for="luggage">Number of Suitcases</label>
+                                    <input type="number" id="luggage" name="luggage" min="0" max="10" placeholder="e.g. 2">
+                                </div>
+                                <div class="form-group">
+                                    <label for="meetGreet">Meet &amp; Greet with name board?</label>
+                                    <select id="meetGreet" name="meetGreet">
+                                        <option value="No">No</option>
+                                        <option value="Yes">Yes</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label for="passengers">Number of Passengers *</label>
                                 <input type="number" id="passengers" name="passengers" min="1" max="7" required aria-required="true">
