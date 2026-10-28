@@ -322,7 +322,8 @@ class EmailService {
             's-class': 'Mercedes S-Class',
             'v-class': 'Mercedes V-Class',
             'tesla-model-3': 'Tesla Model 3',
-            'tesla-model-s': 'Tesla Model S'
+            'tesla-model-s': 'Tesla Model S',
+        'tesla-model-y': 'Tesla Model Y'
         };
         return vehicles[vehicle] || vehicle;
     }
