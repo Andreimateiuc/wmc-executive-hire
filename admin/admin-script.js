@@ -438,7 +438,10 @@ function formatVehicle(vehicle) {
         'v-class': 'Mercedes V-Class',
         'tesla-model-3': 'Tesla Model 3',
         'tesla-model-s': 'Tesla Model S',
-        'tesla-model-y': 'Tesla Model Y'
+        'tesla-model-y': 'Tesla Model Y',
+        'standard-skoda-superb': 'Skoda Superb (Standard)',
+        'standard-toyota-corolla': 'Toyota Corolla (Standard)',
+        'standard-mercedes-c-class': 'Mercedes C-Class (Standard)'
     };
     return vehicles[vehicle] || vehicle;
 }

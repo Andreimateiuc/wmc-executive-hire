@@ -236,7 +236,10 @@ document.addEventListener('DOMContentLoaded', function() {
             'v-class': 'Mercedes V-Class / Executive MPV',
             'tesla-model-3': 'Tesla Model 3 / Electric',
             'tesla-model-s': 'Tesla Model S / Electric',
-            'tesla-model-y': 'Tesla Model Y / Electric SUV'
+            'tesla-model-y': 'Tesla Model Y / Electric SUV',
+            'standard-skoda-superb': 'Skoda Superb / Standard',
+            'standard-toyota-corolla': 'Toyota Corolla / Standard',
+            'standard-mercedes-c-class': 'Mercedes C-Class / Standard'
         };
         const serviceLabels = {
             airport: 'Airport Transfer',
