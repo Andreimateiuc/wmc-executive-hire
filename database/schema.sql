@@ -113,7 +113,9 @@ CREATE TABLE IF NOT EXISTS booking_notes (
 INSERT INTO vehicles (name, type, capacity, description, features, image_url) VALUES
 ('Mercedes E-Class', 'e-class', 3, 'Perfect for executive travel and airport transfers with sophisticated comfort and style', 'Leather seats, Climate control, Premium sound system, Wi-Fi, Phone chargers', 'images/mercedes-e-class.jpeg'),
 ('Mercedes S-Class', 's-class', 3, 'The pinnacle of luxury with cutting-edge technology and unparalleled comfort', 'Executive leather seats, Advanced climate control, Premium Burmester sound, Wi-Fi, Massage seats, Ambient lighting', 'images/mercedes-s-class.jpeg'),
-('Mercedes V-Class', 'v-class', 7, 'Spacious luxury MPV ideal for group travel and family airport transfers', 'Spacious interior, Individual climate zones, Entertainment system, Wi-Fi, USB charging ports, Ample luggage space', 'images/mercedes-v-class.jpg');
+('Mercedes V-Class', 'v-class', 7, 'Spacious luxury MPV ideal for group travel and family airport transfers', 'Spacious interior, Individual climate zones, Entertainment system, Wi-Fi, USB charging ports, Ample luggage space', 'images/mercedes-v-class.jpg'),
+('Tesla Model 3', 'tesla-model-3', 4, 'Black, fully electric saloon: quiet, smooth and zero emissions', 'Electric drive, Panoramic glass roof, Climate control, USB-C charging', 'images/tesla-model-3.jpg'),
+('Tesla Model S', 'tesla-model-s', 4, 'Premium electric executive car with spacious cabin and zero emissions', 'Electric drive, Panoramic glass roof, Rear touchscreen, Premium audio, USB-C charging', 'images/tesla-model-s.jpg');
 
 -- Insert default services
 INSERT INTO services (name, type, description, base_price) VALUES

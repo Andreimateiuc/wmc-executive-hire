@@ -233,7 +233,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const vehicleLabels = {
             'e-class': 'Mercedes E-Class / Comfort',
             's-class': 'Mercedes S-Class / Executive',
-            'v-class': 'Mercedes V-Class / Executive MPV'
+            'v-class': 'Mercedes V-Class / Executive MPV',
+            'tesla-model-3': 'Tesla Model 3 / Electric',
+            'tesla-model-s': 'Tesla Model S / Electric'
         };
         const serviceLabels = {
             airport: 'Airport Transfer',
