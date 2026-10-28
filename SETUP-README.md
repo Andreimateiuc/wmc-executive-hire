@@ -243,7 +243,7 @@ POST   /api/admin/change-password          # Change password
 
 **In HTML files:**
 Search and replace:
-- `+447501073623` → Your phone number
+- `+447459417049` → Your phone number
 - `help@wmcprivatehire.com` → Your email
 
 **In .env file:**
@@ -515,9 +515,9 @@ FLUSH PRIVILEGES;
 ## 📞 Support
 
 **Business Contact:**
-- Phone: +44 7501 073623
+- Phone: +44 7459 417049
 - Email: help@wmcprivatehire.com
-- WhatsApp: [Message Us](https://wa.me/447501073623)
+- WhatsApp: [Message Us](https://wa.me/447459417049)
 
 **Technical Issues:**
 - Check `DEPLOYMENT-GUIDE.md`

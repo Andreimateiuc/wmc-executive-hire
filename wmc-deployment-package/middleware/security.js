@@ -84,7 +84,7 @@ const bookingLimiter = rateLimit({
         });
         res.status(429).json({
             success: false,
-            message: 'Too many booking requests. Please try again later or call us at +44 7501 073623.'
+            message: 'Too many booking requests. Please try again later or call us at +44 7459 417049.'
         });
     }
 });

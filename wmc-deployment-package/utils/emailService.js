@@ -81,9 +81,9 @@ class EmailService {
                             
                             <p>If you have any questions, please don't hesitate to contact us:</p>
                             <p>
-                                📞 Phone: <a href="tel:+447501073623">+44 7501 073623</a><br>
+                                📞 Phone: <a href="tel:+447459417049">+44 7459 417049</a><br>
                                 📧 Email: <a href="mailto:help@wmcprivatehire.com">help@wmcprivatehire.com</a><br>
-                                💬 WhatsApp: <a href="https://wa.me/447501073623">Message Us</a>
+                                💬 WhatsApp: <a href="https://wa.me/447459417049">Message Us</a>
                             </p>
                         </div>
                         <div class="footer">
@@ -292,13 +292,13 @@ class EmailService {
                         <div class="content">
                             <h2>Dear ${contactData.customerName},</h2>
                             <p>Thank you for contacting WMC Executive Private Hire. We have received your message and will respond as soon as possible.</p>
-                            <p>Our team typically responds within 2-4 hours during business hours (9am-6pm, Monday-Friday). For urgent inquiries, please call us directly at <a href="tel:+447501073623">+44 7501 073623</a>.</p>
+                            <p>Our team typically responds within 2-4 hours during business hours (9am-6pm, Monday-Friday). For urgent inquiries, please call us directly at <a href="tel:+447459417049">+44 7459 417049</a>.</p>
                             <p>We look forward to serving you!</p>
                             <p>Best regards,<br>WMC Executive Private Hire Team</p>
                         </div>
                         <div class="footer">
                             <p>WMC Executive Private Hire - Premium Private Hire Service in Northampton</p>
-                            <p>📞 +44 7501 073623 | 📧 help@wmcprivatehire.com</p>
+                            <p>📞 +44 7459 417049 | 📧 help@wmcprivatehire.com</p>
                         </div>
                     </div>
                 </body>

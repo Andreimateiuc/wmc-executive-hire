@@ -223,7 +223,7 @@ npm run deploy        # Deploy to Heroku
 
 ### Business Contact:
 - **Email:** help@wmcprivatehire.com
-- **Phone:** +44 7501 073623
+- **Phone:** +44 7459 417049
 
 ---
 
