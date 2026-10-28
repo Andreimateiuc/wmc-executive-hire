@@ -45,7 +45,7 @@ app.use(helmet({
             scriptSrc: ["'self'", "'unsafe-inline'"],
             imgSrc: ["'self'", "data:", "https:"],
             connectSrc: ["'self'"],
-            frameSrc: ["'none'"],
+            frameSrc: ["https://www.google.com", "https://maps.google.com"],
             objectSrc: ["'none'"]
         }
     },
