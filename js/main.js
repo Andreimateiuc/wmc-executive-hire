@@ -430,3 +430,30 @@ if (window.history.replaceState) {
         }, 5000);
     });
 })();
+
+// Moving lens in mobile nav menu
+(function () {
+    const menu = document.querySelector('.nav-menu');
+    if (!menu) return;
+    const lens = document.createElement('span');
+    lens.className = 'nav-lens';
+    menu.prepend(lens);
+    const links = Array.from(menu.querySelectorAll('a'));
+    const page = location.pathname.split('/').pop() || 'index.html';
+    let current = links.find(a => a.getAttribute('href') === page) || links[0];
+    function moveTo(a) {
+        links.forEach(l => l.classList.toggle('lens-on', l === a));
+        lens.style.top = (a.parentElement.offsetTop + a.offsetTop) + 'px';
+        lens.style.height = a.offsetHeight + 'px';
+    }
+    links.forEach(a => {
+        a.addEventListener('mouseenter', () => moveTo(a));
+        a.addEventListener('touchstart', () => moveTo(a), { passive: true });
+        a.addEventListener('focus', () => moveTo(a));
+    });
+    menu.addEventListener('mouseleave', () => moveTo(current));
+    const obs = new MutationObserver(() => requestAnimationFrame(() => moveTo(current)));
+    obs.observe(menu, { attributes: true, attributeFilter: ['class'] });
+    window.addEventListener('resize', () => moveTo(current));
+    requestAnimationFrame(() => moveTo(current));
+})();
