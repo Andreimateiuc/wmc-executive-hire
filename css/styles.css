@@ -2434,3 +2434,22 @@ textarea:focus {
         white-space: nowrap;
     }
 }
+
+/* Hero background slideshow */
+.hero { background-image: none; background-color: #0b0b0b; overflow: hidden; }
+.hero-slides { position: absolute; inset: 0; z-index: -1; }
+.hero-slide {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center 60%;
+    opacity: 0; transform: scale(1.04);
+    transition: opacity 1.6s ease-in-out, transform 7s ease-out;
+}
+.hero-slide.is-active { opacity: 1; transform: scale(1); }
+.hero .hero-overlay {
+    z-index: 0;
+    background:
+        radial-gradient(circle at 50% 45%, rgba(0, 0, 0, 0.35), transparent 30rem),
+        linear-gradient(180deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.5) 45%, rgba(0, 0, 0, 0.78) 100%);
+}
+@media (max-width: 768px) { .hero-slide { background-position: 60% center; } }
+@media (prefers-reduced-motion: reduce) { .hero-slide { transition: none; transform: none; } }

@@ -405,3 +405,24 @@ document.addEventListener('DOMContentLoaded', function() {
 if (window.history.replaceState) {
     window.history.replaceState(null, null, window.location.href);
 }
+
+// Hero background slideshow (lazy-loads slides after page load)
+(function () {
+    var slides = document.querySelectorAll('.hero-slide');
+    if (slides.length < 2) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    window.addEventListener('load', function () {
+        slides.forEach(function (s) {
+            var src = s.getAttribute('data-bg');
+            if (src) { var im = new Image(); im.onload = function () { s.style.backgroundImage = "url('" + src + "')"; s.dataset.ready = '1'; }; im.src = src; }
+            else s.dataset.ready = '1';
+        });
+        var i = 0;
+        setInterval(function () {
+            var n = (i + 1) % slides.length, tries = 0;
+            while (!slides[n].dataset.ready && tries++ < slides.length) n = (n + 1) % slides.length;
+            if (n === i) return;
+            slides[i].classList.remove('is-active'); slides[n].classList.add('is-active'); i = n;
+        }, 5000);
+    });
+})();
