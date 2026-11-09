@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Get an indicative journey quote from WMC Executive Private Hire. Sample rates for Standard, Tesla, Mercedes and V-Class private hire in Northampton and across the UK.">
-    <title>Get a Quote | WMC Executive Private Hire | Indicative Journey Quote</title>
+    <meta name="description" content="Get an estimated journey quote from WMC Executive Private Hire for Standard, Tesla, Mercedes and V-Class private hire in Northampton and across the UK.">
+    <title>WMC Executive – Get a Quote</title>
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-.quote-banner{background:#7a1c1c;color:#fff;text-align:center;padding:8px 12px;font-weight:700;font-size:.9rem;letter-spacing:.03em}
-.quote-calc{--qc-bg:#0b0b0c;--qc-card:#16161a;--qc-gold:#c9a24b;--qc-txt:#eee;--qc-mut:#a3a3a8;--qc-warn:#3a2a08;background:var(--qc-bg);color:var(--qc-txt);padding:16px 0 30px;line-height:1.5}
+.quote-calc{--qc-bg:#0b0b0c;--qc-card:#16161a;--qc-gold:#c9a24b;--qc-txt:#eee;--qc-mut:#a3a3a8;background:var(--qc-bg);color:var(--qc-txt);padding:16px 0 30px;line-height:1.5}
 .quote-calc *{box-sizing:border-box}
 .quote-calc .qc-main{max-width:980px;margin:0 auto;padding:16px;display:grid;grid-template-columns:1.2fr 1fr;gap:18px}
 @media(max-width:760px){.quote-calc .qc-main{grid-template-columns:1fr}}
@@ -25,19 +24,16 @@
 .quote-calc .row input{width:auto}
 .quote-calc .row label{margin:0}
 .quote-calc .hint{font-size:.78rem;color:var(--qc-mut);margin-top:4px}
+.quote-calc .estimate-note{color:var(--qc-gold);font-size:.9rem;margin:0 0 4px;font-weight:500}
 .quote-calc .price{font-size:2.3rem;font-weight:800;color:var(--qc-gold);margin:6px 0}
-.quote-calc .tag{display:inline-block;background:var(--qc-warn);color:#f5c96a;border:1px solid #6b4f12;border-radius:6px;padding:2px 8px;font-size:.75rem;font-weight:700}
 .quote-calc .err{color:#ff8a80;font-size:.9rem;min-height:1.2em}
+.quote-calc .under-min{display:none;margin:8px 0;padding:12px;border:1px solid #6b4f12;border-radius:9px;background:#1a1408;color:#f5c96a;font-size:.95rem}
+.quote-calc .under-min a{color:var(--qc-gold);font-weight:700}
 .quote-calc table{width:100%;border-collapse:collapse;font-size:.9rem;margin-top:8px}
 .quote-calc td{padding:5px 0;border-bottom:1px solid #26262c}
 .quote-calc td:last-child{text-align:right}
-.quote-calc .qc-btn{margin-top:16px;width:100%;padding:12px;border:0;border-radius:9px;background:var(--qc-gold);color:#111;font-weight:700;font-size:1rem;cursor:pointer}
-.quote-calc .preview{margin-top:12px;background:#0f0f12;border:1px dashed var(--qc-gold);border-radius:9px;padding:12px;font-size:.88rem;white-space:pre-wrap;display:none}
-.quote-calc details{grid-column:1/-1}
-.quote-calc summary{cursor:pointer;color:var(--qc-gold);font-weight:700}
-.quote-calc .rates{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:10px}
-.quote-calc .qc-note{max-width:980px;margin:0 auto;padding:10px 16px 0;color:var(--qc-mut);font-size:.78rem}
-
+.quote-calc .qc-btn{display:block;margin-top:16px;width:100%;padding:12px;border:0;border-radius:9px;background:var(--qc-gold);color:#111;font-weight:700;font-size:1rem;cursor:pointer;text-align:center;text-decoration:none}
+.quote-calc .qc-btn[aria-disabled="true"]{opacity:.45;pointer-events:none}
 .quote-calc .suggest-wrap{position:relative}
 .quote-calc .suggest{position:absolute;left:0;right:0;top:100%;z-index:20;background:#0f0f12;border:1px solid #33333a;border-radius:0 0 9px 9px;max-height:220px;overflow:auto;display:none}
 .quote-calc .suggest button{display:block;width:100%;text-align:left;background:transparent;border:0;border-bottom:1px solid #26262c;color:var(--qc-txt);padding:10px 12px;font-size:.85rem;cursor:pointer;border-radius:0;margin:0}
@@ -45,6 +41,7 @@
 .quote-calc .status{font-size:.82rem;color:var(--qc-mut);min-height:1.2em;margin-top:8px}
 .quote-calc .status.ok{color:#8bc34a}.quote-calc .status.warn{color:#f5c96a}.quote-calc .status.err{color:#ff8a80}
 .quote-calc .osm-attr{max-width:980px;margin:8px auto 0;padding:0 16px;color:var(--qc-mut);font-size:.72rem}
+.page-header .estimate-line{color:#c9a24b;font-size:.95rem;margin-top:8px;font-weight:500}
     </style>
 </head>
 <body>
@@ -80,11 +77,10 @@
     <section class="page-header">
         <div class="container">
             <h1>Get a Quote</h1>
-            <p>Indicative journey quote · Northampton &amp; anywhere in the UK</p>
+            <p>Journey estimate · Northampton &amp; anywhere in the UK</p>
+            <p class="estimate-line">Estimated price only. Your final fare is confirmed when you book on WhatsApp.</p>
         </div>
     </section>
-
-    <div class="quote-banner">DEMO PROTOTYPE – SAMPLE RATES, NOT WMC PRICES – NOTHING IS SENT OR BOOKED</div>
 
     <div class="quote-calc">
     <div class="qc-main">
@@ -102,7 +98,7 @@
     </div>
     <label for="miles">Route distance in miles</label>
     <input id="miles" type="number" min="0" step="0.1" inputmode="decimal" placeholder="Auto-filled from map, or enter manually">
-    <div class="hint" id="milesHint">Start typing an address (UK). Pick a suggestion for pickup and destination to auto-calculate road miles. You can still enter miles manually if lookup fails.</div>
+    <div class="hint" id="milesHint">Start typing a UK address. Pick a suggestion for pickup and destination to auto-calculate road miles. You can still enter miles manually if lookup fails.</div>
     <div class="status" id="routeStatus" aria-live="polite"></div>
     <label for="cat">Vehicle category</label>
     <select id="cat">
@@ -111,28 +107,28 @@
     <option value="mercedes">Mercedes – E-Class, S-Class</option>
     <option value="mpv">Mercedes V-Class – up to 7 passengers</option>
     </select>
-    <div class="row"><input id="ret" type="checkbox"><label for="ret">Return journey (illustrative: 2 × one-way)</label></div>
+    <div class="row"><input id="ret" type="checkbox"><label for="ret">Return journey (2 × one-way)</label></div>
     </section>
     <section class="card" aria-live="polite">
-    <h2>Indicative quote <span class="tag">SAMPLE RATES</span></h2>
+    <h2>Estimated price</h2>
+    <p class="estimate-note">Estimated price only. Your final fare is confirmed when you book on WhatsApp.</p>
     <div class="price" id="price">—</div>
     <div class="err" id="err"></div>
+    <div class="under-min" id="underMin">For journeys under 15 miles, please message us on WhatsApp: <a id="underMinLink" href="https://wa.me/447459417049">+44 7459 417049</a></div>
     <table id="breakdown"></table>
-    <p class="hint">Non-binding estimate calculated from SAMPLE rates, not WMC prices. The final price is confirmed by the operator. Availability is not checked. Chauffeur service available on request. Partner: First Class Chauffeuring.</p>
-    <button id="pv" class="qc-btn" type="button">Preview booking request (not sent)</button>
-    <div class="preview" id="preview"></div>
+    <p class="hint" id="extrasNote">Airport parking, tolls and waiting time may be extra. Chauffeur service available on request. Partner: First Class Chauffeuring.</p>
+    <a id="waBook" class="qc-btn" href="https://wa.me/447459417049" target="_blank" rel="noopener noreferrer">Book on WhatsApp</a>
     </section>
-    <details class="card"><summary>Demo settings – test rate assumptions (SAMPLE values only)</summary>
-    <p class="hint">These defaults are placeholders for testing. Replace with real WMC rates before any live use. Fixed airport fares on the live site are not used here.</p>
-    <div class="rates" id="rates"></div></details>
     </div>
-    <p class="qc-note">Prototype for internal review only. No data is stored, sent or submitted. No personal contact details are collected.</p>
     <p class="osm-attr">Map data © OpenStreetMap contributors · Routing via OSRM · Geocoding via Nominatim</p>
     </div>
 
     <script src="js/main.js"></script>
     <script>
-    var SAMPLE_RATES={standard:{min:10,perMile:2},tesla:{min:12,perMile:2.5},mercedes:{min:15,perMile:3},mpv:{min:18,perMile:3.5}};
+    var MIN_MILES=15;
+    var MIN_FARE=30;
+    var WA_BASE="https://wa.me/447459417049";
+    var RATES={standard:{perMile:1.8},tesla:{perMile:2},mercedes:{perMile:2.2},mpv:{perMile:2.4}};
     var NAMES={standard:"Standard",tesla:"Tesla",mercedes:"Mercedes E/S-Class",mpv:"Mercedes V-Class"};
     function parseMiles(v){if(v===null||v===undefined)return {ok:false,error:"Enter the route distance in miles."};
      var s=String(v).trim();if(s==="")return {ok:false,error:"Enter the route distance in miles."};
@@ -140,20 +136,20 @@
      if(n<=0)return {ok:false,error:"Distance must be greater than 0."};if(n>1500)return {ok:false,error:"Distance looks too large for a UK journey."};
      return {ok:true,value:n};}
     function calcQuote(miles,rate,isReturn){var m=parseMiles(miles);if(!m.ok)return m;
-     if(!rate||!(rate.min>=0)||!(rate.perMile>=0)||!isFinite(rate.min)||!isFinite(rate.perMile))return {ok:false,error:"Sample rates are invalid."};
-     var mileage=m.value*rate.perMile,oneWay=Math.max(rate.min,mileage);oneWay=Math.round(oneWay*100)/100;
-     return {ok:true,miles:m.value,mileage:Math.round(mileage*100)/100,minApplied:rate.min>mileage,oneWay:oneWay,legs:isReturn?2:1,total:Math.round(oneWay*(isReturn?2:1)*100)/100};}
+     if(!rate||!(rate.perMile>=0)||!isFinite(rate.perMile))return {ok:false,error:"Rates are invalid."};
+     if(m.value<MIN_MILES)return {ok:false,underMin:true,miles:m.value,error:"under_min"};
+     var mileage=m.value*rate.perMile;
+     var oneWay=Math.round(Math.max(MIN_FARE,mileage));
+     var legs=isReturn?2:1;
+     return {ok:true,miles:m.value,mileage:Math.round(mileage*100)/100,minApplied:MIN_FARE>mileage,oneWay:oneWay,legs:legs,total:oneWay*legs};}
     function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
-    function gbp(n){return "£"+n.toFixed(2);}
-    if(typeof module!=="undefined")module.exports={calcQuote:calcQuote,parseMiles:parseMiles,esc:esc,SAMPLE_RATES:SAMPLE_RATES};
+    function gbp(n){return "£"+Math.round(n);}
+    if(typeof module!=="undefined")module.exports={calcQuote:calcQuote,parseMiles:parseMiles,esc:esc,RATES:RATES,MIN_MILES:MIN_MILES,MIN_FARE:MIN_FARE};
     if(typeof document!=="undefined"){
      var $=function(id){return document.getElementById(id)};
      var coords={pickup:null,dest:null};
      var timers={pickup:null,dest:null};
      var routeToken=0;
-     var box=$("rates");Object.keys(SAMPLE_RATES).forEach(function(k){var d=document.createElement("div");
-      d.innerHTML="<strong>"+esc(NAMES[k])+"</strong><label>Sample minimum fare (£)</label><input type='number' min='0' step='0.5' id='min_"+k+"' value='"+SAMPLE_RATES[k].min+"'><label>Sample rate per mile (£)</label><input type='number' min='0' step='0.1' id='pm_"+k+"' value='"+SAMPLE_RATES[k].perMile+"'>";box.appendChild(d);});
-     function rateFor(k){return {min:Number($("min_"+k).value),perMile:Number($("pm_"+k).value)};}
      function setStatus(msg,kind){var el=$("routeStatus");el.textContent=msg||"";el.className="status"+(kind?" "+kind:"");}
      function hideSuggest(which){var el=$(which+"Suggest");el.innerHTML="";el.style.display="none";el.hidden=true;}
      function showSuggest(which,results){
@@ -173,10 +169,33 @@
       hideSuggest(which);
       maybeRoute();
      }
-     function render(){var k=$("cat").value,r=calcQuote($("miles").value,rateFor(k),$("ret").checked),b=$("breakdown");$("preview").style.display="none";
-      if(!r.ok){$("price").textContent="—";$("err").textContent=r.error;b.innerHTML="";return r;}
+     function buildWaUrl(r){
+      var pickup=$("pickup").value.trim()||"(not entered)";
+      var dest=$("dest").value.trim()||"(not entered)";
+      var vehicle=NAMES[$("cat").value];
+      var journey=$("ret").checked?"Return":"One-way";
+      var milesLine=$("miles").value.trim()||"(not entered)";
+      var priceLine=(r&&r.ok)?"Estimated price: "+gbp(r.total):(r&&r.underMin)?"Under 15 miles – please quote":"Estimate pending";
+      var text="Hello, I'd like to book a ride.\n\nPickup: "+pickup+"\nDestination: "+dest+"\nMiles: "+milesLine+"\nVehicle: "+vehicle+"\nJourney: "+journey+"\n"+priceLine;
+      return WA_BASE+"?text="+encodeURIComponent(text);
+     }
+     function render(){var k=$("cat").value,r=calcQuote($("miles").value,RATES[k],$("ret").checked),b=$("breakdown"),um=$("underMin"),wa=$("waBook");
+      um.style.display="none";
+      if(r.underMin){
+        $("price").textContent="—";
+        $("err").textContent="";
+        b.innerHTML="";
+        um.style.display="block";
+        wa.href=buildWaUrl(r);
+        wa.setAttribute("aria-disabled","false");
+        return r;
+      }
+      if(!r.ok){$("price").textContent="—";$("err").textContent=r.error;b.innerHTML="";wa.href=WA_BASE;wa.setAttribute("aria-disabled","true");return r;}
       $("err").textContent="";$("price").textContent=gbp(r.total);
-      b.innerHTML="<tr><td>Distance</td><td>"+r.miles+" mi</td></tr><tr><td>Mileage at sample rate</td><td>"+gbp(r.mileage)+"</td></tr><tr><td>Sample minimum fare</td><td>"+gbp(rateFor(k).min)+(r.minApplied?" (applied)":"")+"</td></tr><tr><td>One-way</td><td>"+gbp(r.oneWay)+"</td></tr>"+(r.legs===2?"<tr><td>Return (× 2)</td><td>"+gbp(r.total)+"</td></tr>":"");return r;}
+      b.innerHTML="<tr><td>Distance</td><td>"+r.miles+" mi</td></tr><tr><td>Rate</td><td>£"+RATES[k].perMile.toFixed(2)+"/mi</td></tr><tr><td>Mileage</td><td>"+gbp(r.mileage)+"</td></tr><tr><td>Minimum fare</td><td>"+gbp(MIN_FARE)+(r.minApplied?" (applied)":"")+"</td></tr><tr><td>One-way</td><td>"+gbp(r.oneWay)+"</td></tr>"+(r.legs===2?"<tr><td>Return (× 2)</td><td>"+gbp(r.total)+"</td></tr>":"");
+      wa.href=buildWaUrl(r);
+      wa.setAttribute("aria-disabled","false");
+      return r;}
      function maybeRoute(){
       if(!coords.pickup||!coords.dest)return;
       var token=++routeToken;
@@ -198,7 +217,7 @@
         })
         .catch(function(){
           if(token!==routeToken)return;
-          setStatus("Distance lookup failed. Enter miles manually to see an indicative quote.", "err");
+          setStatus("Distance lookup failed. Enter miles manually to see an estimate.", "err");
         });
      }
      function lookup(which){
@@ -226,10 +245,6 @@
      bindSuggest("pickup");
      bindSuggest("dest");
      ["pickup","dest","miles","cat","ret"].forEach(function(id){$(id).addEventListener("input",render);$(id).addEventListener("change",render);});
-     box.addEventListener("input",render);
-     $("pv").addEventListener("click",function(){var r=render(),p=$("preview");
-      p.textContent="PREVIEW ONLY – this request has NOT been sent.\n\nPickup: "+($("pickup").value.trim()||"(not entered)")+"\nDestination: "+($("dest").value.trim()||"(not entered)")+"\nVehicle: "+NAMES[$("cat").value]+"\nJourney: "+($("ret").checked?"Return":"One-way")+"\nIndicative (SAMPLE RATES): "+(r.ok?gbp(r.total):"n/a")+"\n\nFinal price and availability are confirmed by the operator.";
-      p.style.display="block";});
      document.addEventListener("click",function(e){
       if(!e.target.closest||!e.target.closest(".suggest-wrap")){hideSuggest("pickup");hideSuggest("dest");}
      });
