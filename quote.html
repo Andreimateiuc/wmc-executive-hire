@@ -114,7 +114,7 @@
     <p class="estimate-note">Estimated price only. Your final fare is confirmed when you book on WhatsApp.</p>
     <div class="price" id="price">—</div>
     <div class="err" id="err"></div>
-    <div class="under-min" id="underMin">For journeys under 15 miles, please message us on WhatsApp: <a id="underMinLink" href="https://wa.me/447459417049">+44 7459 417049</a></div>
+    <div class="under-min" id="underMin"><span id="underMinText">For journeys under 15 miles, please message us on WhatsApp: </span><a id="underMinLink" href="https://wa.me/447459417049">+44 7459 417049</a></div>
     <table id="breakdown"></table>
     <p class="hint" id="extrasNote">Airport parking, tolls and waiting time may be extra. Chauffeur service available on request. Partner: First Class Chauffeuring.</p>
     <a id="waBook" class="qc-btn" href="https://wa.me/447459417049" target="_blank" rel="noopener noreferrer">Book on WhatsApp</a>
@@ -128,14 +128,15 @@
     var MIN_MILES=15;
     var MIN_FARE=30;
     var WA_BASE="https://wa.me/447459417049";
-    var RATES={standard:{perMile:1.8},tesla:{perMile:2},mercedes:{perMile:2.2},mpv:{perMile:2.4}};
+    var RATES={standard:{perMile:1.8},tesla:{perMile:2},mercedes:{perMile:2.2}};
     var NAMES={standard:"Standard",tesla:"Tesla",mercedes:"Mercedes E/S-Class",mpv:"Mercedes V-Class"};
     function parseMiles(v){if(v===null||v===undefined)return {ok:false,error:"Enter the route distance in miles."};
      var s=String(v).trim();if(s==="")return {ok:false,error:"Enter the route distance in miles."};
      var n=Number(s);if(!isFinite(n))return {ok:false,error:"Distance must be a number."};
      if(n<=0)return {ok:false,error:"Distance must be greater than 0."};if(n>1500)return {ok:false,error:"Distance looks too large for a UK journey."};
      return {ok:true,value:n};}
-    function calcQuote(miles,rate,isReturn){var m=parseMiles(miles);if(!m.ok)return m;
+    function calcQuote(miles,rate,isReturn,category){if(category==="mpv"){var mv=parseMiles(miles);return {ok:false,vclass:true,miles:mv.ok?mv.value:null,error:"vclass"};}
+     var m=parseMiles(miles);if(!m.ok)return m;
      if(!rate||!(rate.perMile>=0)||!isFinite(rate.perMile))return {ok:false,error:"Rates are invalid."};
      if(m.value<MIN_MILES)return {ok:false,underMin:true,miles:m.value,error:"under_min"};
      var mileage=m.value*rate.perMile;
@@ -175,16 +176,29 @@
       var vehicle=NAMES[$("cat").value];
       var journey=$("ret").checked?"Return":"One-way";
       var milesLine=$("miles").value.trim()||"(not entered)";
-      var priceLine=(r&&r.ok)?"Estimated price: "+gbp(r.total):(r&&r.underMin)?"Under 15 miles – please quote":"Estimate pending";
+      var priceLine=(r&&r.ok)?"Estimated price: "+gbp(r.total):(r&&r.vclass)?"Mercedes V-Class – please quote":(r&&r.underMin)?"Under 15 miles – please quote":"Estimate pending";
       var text="Hello, I'd like to book a ride.\n\nPickup: "+pickup+"\nDestination: "+dest+"\nMiles: "+milesLine+"\nVehicle: "+vehicle+"\nJourney: "+journey+"\n"+priceLine;
       return WA_BASE+"?text="+encodeURIComponent(text);
      }
-     function render(){var k=$("cat").value,r=calcQuote($("miles").value,RATES[k],$("ret").checked),b=$("breakdown"),um=$("underMin"),wa=$("waBook");
+     function render(){var k=$("cat").value,r=calcQuote($("miles").value,RATES[k],$("ret").checked,k),b=$("breakdown"),um=$("underMin"),umt=$("underMinText"),uml=$("underMinLink"),wa=$("waBook");
       um.style.display="none";
+      if(r.vclass){
+        $("price").textContent="—";
+        $("err").textContent="";
+        b.innerHTML="";
+        umt.textContent="For the Mercedes V-Class, please message us on WhatsApp for a quote: ";
+        uml.href=buildWaUrl(r);uml.textContent="+44 7459 417049";
+        um.style.display="block";
+        wa.href=buildWaUrl(r);
+        wa.setAttribute("aria-disabled","false");
+        return r;
+      }
       if(r.underMin){
         $("price").textContent="—";
         $("err").textContent="";
         b.innerHTML="";
+        umt.textContent="For journeys under 15 miles, please message us on WhatsApp: ";
+        uml.href=buildWaUrl(r);uml.textContent="+44 7459 417049";
         um.style.display="block";
         wa.href=buildWaUrl(r);
         wa.setAttribute("aria-disabled","false");
