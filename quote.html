@@ -206,7 +206,7 @@
       }
       if(!r.ok){$("price").textContent="—";$("err").textContent=r.error;b.innerHTML="";wa.href=WA_BASE;wa.setAttribute("aria-disabled","true");return r;}
       $("err").textContent="";$("price").textContent=gbp(r.total);
-      b.innerHTML="<tr><td>Distance</td><td>"+r.miles+" mi</td></tr><tr><td>Rate</td><td>£"+RATES[k].perMile.toFixed(2)+"/mi</td></tr><tr><td>Mileage</td><td>"+gbp(r.mileage)+"</td></tr><tr><td>Minimum fare</td><td>"+gbp(MIN_FARE)+(r.minApplied?" (applied)":"")+"</td></tr><tr><td>One-way</td><td>"+gbp(r.oneWay)+"</td></tr>"+(r.legs===2?"<tr><td>Return (× 2)</td><td>"+gbp(r.total)+"</td></tr>":"");
+      b.innerHTML="<tr><td>Distance</td><td>"+r.miles+" mi</td></tr><tr><td>Rate</td><td>£"+RATES[k].perMile.toFixed(2)+"/mi</td></tr><tr><td>Distance charge</td><td>"+r.miles+" mi × £"+RATES[k].perMile.toFixed(2)+" = "+gbp(r.mileage)+"</td></tr>"+(r.minApplied?"<tr><td>Minimum fare applied</td><td>"+gbp(MIN_FARE)+"</td></tr>":"")+"<tr><td>One-way</td><td>"+gbp(r.oneWay)+"</td></tr>"+(r.legs===2?"<tr><td>Return (2 × one-way)</td><td>"+gbp(r.total)+"</td></tr>":"");
       wa.href=buildWaUrl(r);
       wa.setAttribute("aria-disabled","false");
       return r;}
