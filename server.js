@@ -127,6 +127,182 @@ app.use('/api/contact', contactRoutes);
 app.use('/api/admin', adminRoutes);
 
 // ============================================
+// QUOTE GEOCODE / ROUTE PROXIES (OpenStreetMap)
+// Browser calls same-origin only (CSP connect-src 'self').
+// Upstream: Nominatim + public OSRM. No new dependencies.
+// ============================================
+const https = require('https');
+const OSM_UA = 'WMC-Executive-Quote/1.0 (help@wmcprivatehire.com)';
+const osmCache = new Map(); // key -> { expires, value }
+let osmGate = Promise.resolve();
+let osmNextAt = 0;
+
+function osmCacheGet(key) {
+    const hit = osmCache.get(key);
+    if (!hit) return undefined;
+    if (Date.now() > hit.expires) {
+        osmCache.delete(key);
+        return undefined;
+    }
+    return hit.value;
+}
+
+function osmCacheSet(key, value, ttlMs) {
+    osmCache.set(key, { expires: Date.now() + ttlMs, value });
+    if (osmCache.size > 400) {
+        const oldest = osmCache.keys().next().value;
+        osmCache.delete(oldest);
+    }
+}
+
+function httpsGetJson(url) {
+    return new Promise((resolve, reject) => {
+        const req = https.get(url, {
+            headers: {
+                'User-Agent': OSM_UA,
+                'Accept': 'application/json'
+            },
+            timeout: 12000
+        }, (res) => {
+            let body = '';
+            res.on('data', (chunk) => { body += chunk; });
+            res.on('end', () => {
+                if (res.statusCode && res.statusCode >= 400) {
+                    return reject(new Error('Upstream HTTP ' + res.statusCode));
+                }
+                try {
+                    resolve(JSON.parse(body || 'null'));
+                } catch (err) {
+                    reject(err);
+                }
+            });
+        });
+        req.on('error', reject);
+        req.on('timeout', () => {
+            req.destroy();
+            reject(new Error('Upstream timeout'));
+        });
+    });
+}
+
+// Serialize upstream calls to ~1 request/second (Nominatim usage policy)
+function withOsmRateLimit(fn) {
+    const run = osmGate.then(async () => {
+        const wait = Math.max(0, osmNextAt - Date.now());
+        if (wait) await new Promise((r) => setTimeout(r, wait));
+        osmNextAt = Date.now() + 1000;
+        return fn();
+    });
+    osmGate = run.then(() => undefined, () => undefined);
+    return run;
+}
+
+function parseLatLon(pair) {
+    if (typeof pair !== 'string') return null;
+    const parts = pair.split(',');
+    if (parts.length !== 2) return null;
+    const lat = Number(parts[0].trim());
+    const lon = Number(parts[1].trim());
+    if (!isFinite(lat) || !isFinite(lon)) return null;
+    if (lat < -90 || lat > 90 || lon < -180 || lon > 180) return null;
+    return { lat, lon };
+}
+
+app.get('/api/geocode', async (req, res) => {
+    try {
+        const q = String(req.query.q || '').trim();
+        if (q.length < 3 || q.length > 120) {
+            return res.status(400).json({
+                success: false,
+                message: 'Query must be between 3 and 120 characters.'
+            });
+        }
+
+        const cacheKey = 'geo:' + q.toLowerCase();
+        const cached = osmCacheGet(cacheKey);
+        if (cached) {
+            return res.json({ success: true, cached: true, results: cached });
+        }
+
+        const url = 'https://nominatim.openstreetmap.org/search?' + new URLSearchParams({
+            format: 'json',
+            countrycodes: 'gb',
+            limit: '5',
+            q
+        }).toString();
+
+        const data = await withOsmRateLimit(() => httpsGetJson(url));
+        const results = (Array.isArray(data) ? data : [])
+            .map((r) => ({
+                display_name: r.display_name,
+                lat: Number(r.lat),
+                lon: Number(r.lon)
+            }))
+            .filter((r) => r.display_name && isFinite(r.lat) && isFinite(r.lon));
+
+        osmCacheSet(cacheKey, results, 60 * 60 * 1000);
+        return res.json({ success: true, cached: false, results });
+    } catch (error) {
+        logger.error('Geocode proxy failed:', error);
+        return res.status(502).json({
+            success: false,
+            message: 'Address lookup is temporarily unavailable.'
+        });
+    }
+});
+
+app.get('/api/route', async (req, res) => {
+    try {
+        const from = parseLatLon(String(req.query.from || ''));
+        const to = parseLatLon(String(req.query.to || ''));
+        if (!from || !to) {
+            return res.status(400).json({
+                success: false,
+                message: 'from and to must be lat,lon pairs.'
+            });
+        }
+
+        const cacheKey = 'route:' + from.lat.toFixed(5) + ',' + from.lon.toFixed(5) + '>' + to.lat.toFixed(5) + ',' + to.lon.toFixed(5);
+        const cached = osmCacheGet(cacheKey);
+        if (cached) {
+            return res.json({ success: true, cached: true, ...cached });
+        }
+
+        // OSRM expects lon,lat
+        const path = from.lon + ',' + from.lat + ';' + to.lon + ',' + to.lat;
+        const url = 'https://router.project-osrm.org/route/v1/driving/' + path + '?overview=false';
+
+        const data = await withOsmRateLimit(() => httpsGetJson(url));
+        const route = data && Array.isArray(data.routes) ? data.routes[0] : null;
+        if (!route || !(route.distance >= 0)) {
+            return res.status(502).json({
+                success: false,
+                message: 'No driving route found for those points.'
+            });
+        }
+
+        const metres = route.distance;
+        const miles = Math.round((metres / 1609.344) * 10) / 10;
+        const durationSeconds = Math.round(route.duration || 0);
+        const payload = {
+            miles,
+            metres: Math.round(metres),
+            durationSeconds,
+            durationMinutes: Math.round(durationSeconds / 60)
+        };
+        osmCacheSet(cacheKey, payload, 60 * 60 * 1000);
+        return res.json({ success: true, cached: false, ...payload });
+    } catch (error) {
+        logger.error('Route proxy failed:', error);
+        return res.status(502).json({
+            success: false,
+            message: 'Route lookup is temporarily unavailable.'
+        });
+    }
+});
+
+
+// ============================================
 // HEALTH CHECK & MONITORING
 // ============================================
 

@@ -37,6 +37,14 @@
 .quote-calc summary{cursor:pointer;color:var(--qc-gold);font-weight:700}
 .quote-calc .rates{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:10px}
 .quote-calc .qc-note{max-width:980px;margin:0 auto;padding:10px 16px 0;color:var(--qc-mut);font-size:.78rem}
+
+.quote-calc .suggest-wrap{position:relative}
+.quote-calc .suggest{position:absolute;left:0;right:0;top:100%;z-index:20;background:#0f0f12;border:1px solid #33333a;border-radius:0 0 9px 9px;max-height:220px;overflow:auto;display:none}
+.quote-calc .suggest button{display:block;width:100%;text-align:left;background:transparent;border:0;border-bottom:1px solid #26262c;color:var(--qc-txt);padding:10px 12px;font-size:.85rem;cursor:pointer;border-radius:0;margin:0}
+.quote-calc .suggest button:hover,.quote-calc .suggest button:focus{background:#1c1c22;outline:none}
+.quote-calc .status{font-size:.82rem;color:var(--qc-mut);min-height:1.2em;margin-top:8px}
+.quote-calc .status.ok{color:#8bc34a}.quote-calc .status.warn{color:#f5c96a}.quote-calc .status.err{color:#ff8a80}
+.quote-calc .osm-attr{max-width:980px;margin:8px auto 0;padding:0 16px;color:var(--qc-mut);font-size:.72rem}
     </style>
 </head>
 <body>
@@ -82,11 +90,20 @@
     <div class="qc-main">
     <section class="card">
     <h2>Your journey</h2>
-    <label for="pickup">Pickup</label><input id="pickup" maxlength="120" placeholder="e.g. Northampton town centre">
-    <label for="dest">Destination</label><input id="dest" maxlength="120" placeholder="e.g. Heathrow Terminal 5">
-    <label for="miles">Route distance in miles (DEMO: enter manually)</label>
-    <input id="miles" type="number" min="0" step="0.1" inputmode="decimal" placeholder="e.g. 70">
-    <div class="hint">Live route distance is not connected in this demo. Addresses above are not looked up.</div>
+    <label for="pickup">Pickup</label>
+    <div class="suggest-wrap">
+      <input id="pickup" maxlength="120" placeholder="e.g. Northampton town centre" autocomplete="off">
+      <div class="suggest" id="pickupSuggest" role="listbox" hidden></div>
+    </div>
+    <label for="dest">Destination</label>
+    <div class="suggest-wrap">
+      <input id="dest" maxlength="120" placeholder="e.g. Heathrow Terminal 5" autocomplete="off">
+      <div class="suggest" id="destSuggest" role="listbox" hidden></div>
+    </div>
+    <label for="miles">Route distance in miles</label>
+    <input id="miles" type="number" min="0" step="0.1" inputmode="decimal" placeholder="Auto-filled from map, or enter manually">
+    <div class="hint" id="milesHint">Start typing an address (UK). Pick a suggestion for pickup and destination to auto-calculate road miles. You can still enter miles manually if lookup fails.</div>
+    <div class="status" id="routeStatus" aria-live="polite"></div>
     <label for="cat">Vehicle category</label>
     <select id="cat">
     <option value="standard">Standard – Skoda Superb, Toyota Corolla Estate, Mercedes C-Class</option>
@@ -110,6 +127,7 @@
     <div class="rates" id="rates"></div></details>
     </div>
     <p class="qc-note">Prototype for internal review only. No data is stored, sent or submitted. No personal contact details are collected.</p>
+    <p class="osm-attr">Map data © OpenStreetMap contributors · Routing via OSRM · Geocoding via Nominatim</p>
     </div>
 
     <script src="js/main.js"></script>
@@ -130,18 +148,91 @@
     if(typeof module!=="undefined")module.exports={calcQuote:calcQuote,parseMiles:parseMiles,esc:esc,SAMPLE_RATES:SAMPLE_RATES};
     if(typeof document!=="undefined"){
      var $=function(id){return document.getElementById(id)};
+     var coords={pickup:null,dest:null};
+     var timers={pickup:null,dest:null};
+     var routeToken=0;
      var box=$("rates");Object.keys(SAMPLE_RATES).forEach(function(k){var d=document.createElement("div");
       d.innerHTML="<strong>"+esc(NAMES[k])+"</strong><label>Sample minimum fare (£)</label><input type='number' min='0' step='0.5' id='min_"+k+"' value='"+SAMPLE_RATES[k].min+"'><label>Sample rate per mile (£)</label><input type='number' min='0' step='0.1' id='pm_"+k+"' value='"+SAMPLE_RATES[k].perMile+"'>";box.appendChild(d);});
      function rateFor(k){return {min:Number($("min_"+k).value),perMile:Number($("pm_"+k).value)};}
+     function setStatus(msg,kind){var el=$("routeStatus");el.textContent=msg||"";el.className="status"+(kind?" "+kind:"");}
+     function hideSuggest(which){var el=$(which+"Suggest");el.innerHTML="";el.style.display="none";el.hidden=true;}
+     function showSuggest(which,results){
+      var el=$(which+"Suggest");el.innerHTML="";
+      if(!results||!results.length){hideSuggest(which);return;}
+      results.forEach(function(r){
+        var b=document.createElement("button");b.type="button";b.setAttribute("role","option");
+        b.textContent=r.display_name;
+        b.addEventListener("click",function(){selectPlace(which,r);});
+        el.appendChild(b);
+      });
+      el.hidden=false;el.style.display="block";
+     }
+     function selectPlace(which,r){
+      $(which).value=r.display_name;
+      coords[which]={lat:r.lat,lon:r.lon,label:r.display_name};
+      hideSuggest(which);
+      maybeRoute();
+     }
      function render(){var k=$("cat").value,r=calcQuote($("miles").value,rateFor(k),$("ret").checked),b=$("breakdown");$("preview").style.display="none";
       if(!r.ok){$("price").textContent="—";$("err").textContent=r.error;b.innerHTML="";return r;}
       $("err").textContent="";$("price").textContent=gbp(r.total);
-      b.innerHTML="<tr><td>Distance (manual)</td><td>"+r.miles+" mi</td></tr><tr><td>Mileage at sample rate</td><td>"+gbp(r.mileage)+"</td></tr><tr><td>Sample minimum fare</td><td>"+gbp(rateFor(k).min)+(r.minApplied?" (applied)":"")+"</td></tr><tr><td>One-way</td><td>"+gbp(r.oneWay)+"</td></tr>"+(r.legs===2?"<tr><td>Return (× 2)</td><td>"+gbp(r.total)+"</td></tr>":"");return r;}
+      b.innerHTML="<tr><td>Distance</td><td>"+r.miles+" mi</td></tr><tr><td>Mileage at sample rate</td><td>"+gbp(r.mileage)+"</td></tr><tr><td>Sample minimum fare</td><td>"+gbp(rateFor(k).min)+(r.minApplied?" (applied)":"")+"</td></tr><tr><td>One-way</td><td>"+gbp(r.oneWay)+"</td></tr>"+(r.legs===2?"<tr><td>Return (× 2)</td><td>"+gbp(r.total)+"</td></tr>":"");return r;}
+     function maybeRoute(){
+      if(!coords.pickup||!coords.dest)return;
+      var token=++routeToken;
+      setStatus("Calculating road distance…","");
+      var from=coords.pickup.lat+","+coords.pickup.lon;
+      var to=coords.dest.lat+","+coords.dest.lon;
+      fetch("/api/route?from="+encodeURIComponent(from)+"&to="+encodeURIComponent(to))
+        .then(function(res){return res.json().then(function(j){return {ok:res.ok,j:j};});})
+        .then(function(x){
+          if(token!==routeToken)return;
+          if(!x.ok||!x.j||!x.j.success||!(x.j.miles>0)){
+            setStatus("Could not calculate road miles automatically. Enter the distance manually below.", "warn");
+            return;
+          }
+          $("miles").value=String(x.j.miles);
+          var mins=x.j.durationMinutes!=null?x.j.durationMinutes:Math.round((x.j.durationSeconds||0)/60);
+          setStatus("Road distance: "+x.j.miles+" mi"+(mins?" · about "+mins+" min drive":"")+" (OpenStreetMap).", "ok");
+          render();
+        })
+        .catch(function(){
+          if(token!==routeToken)return;
+          setStatus("Distance lookup failed. Enter miles manually to see an indicative quote.", "err");
+        });
+     }
+     function lookup(which){
+      var q=$(which).value.trim();
+      coords[which]=null;
+      if(q.length<3){hideSuggest(which);return;}
+      fetch("/api/geocode?q="+encodeURIComponent(q))
+        .then(function(res){return res.json().then(function(j){return {ok:res.ok,j:j};});})
+        .then(function(x){
+          if($(which).value.trim()!==q)return;
+          if(!x.ok||!x.j||!x.j.success){hideSuggest(which);setStatus("Address suggestions unavailable. You can still enter miles manually.", "warn");return;}
+          showSuggest(which,x.j.results||[]);
+        })
+        .catch(function(){if($(which).value.trim()===q){hideSuggest(which);setStatus("Address suggestions unavailable. You can still enter miles manually.", "warn");}});
+     }
+     function bindSuggest(which){
+      $(which).addEventListener("input",function(){
+        coords[which]=null;
+        if(timers[which])clearTimeout(timers[which]);
+        timers[which]=setTimeout(function(){lookup(which);},500);
+      });
+      $(which).addEventListener("blur",function(){setTimeout(function(){hideSuggest(which);},200);});
+      $(which).addEventListener("keydown",function(e){if(e.key==="Escape")hideSuggest(which);});
+     }
+     bindSuggest("pickup");
+     bindSuggest("dest");
      ["pickup","dest","miles","cat","ret"].forEach(function(id){$(id).addEventListener("input",render);$(id).addEventListener("change",render);});
      box.addEventListener("input",render);
      $("pv").addEventListener("click",function(){var r=render(),p=$("preview");
       p.textContent="PREVIEW ONLY – this request has NOT been sent.\n\nPickup: "+($("pickup").value.trim()||"(not entered)")+"\nDestination: "+($("dest").value.trim()||"(not entered)")+"\nVehicle: "+NAMES[$("cat").value]+"\nJourney: "+($("ret").checked?"Return":"One-way")+"\nIndicative (SAMPLE RATES): "+(r.ok?gbp(r.total):"n/a")+"\n\nFinal price and availability are confirmed by the operator.";
       p.style.display="block";});
+     document.addEventListener("click",function(e){
+      if(!e.target.closest||!e.target.closest(".suggest-wrap")){hideSuggest("pickup");hideSuggest("dest");}
+     });
      render();}
     </script>
 </body>
