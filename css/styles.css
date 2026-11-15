@@ -315,7 +315,6 @@ h6 { font-size: 1rem; }
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, var(--color-black) 0%, var(--color-dark-gray) 100%);
-    background-image: url('../images/hero-background.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -2517,4 +2516,52 @@ textarea:focus {
     text-align: center;
     color: var(--color-gold, #c9a24b);
     font-size: 0.9rem;
+}
+
+/* WMC logo image in header (Nov 2026) */
+.logo a {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+}
+.logo-img {
+    display: block;
+    height: 46px;
+    width: auto;
+}
+.logo .logo-subtitle {
+    font-size: 0.68rem;
+    letter-spacing: 2px;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .logo a {
+        flex-direction: row;
+        align-items: center;
+        gap: 0.45rem;
+    }
+    .logo-img {
+        height: 38px;
+    }
+    .logo .logo-subtitle {
+        font-size: 0.58rem;
+    }
+}
+@media (max-width: 360px) {
+    .logo .logo-subtitle {
+        display: none;
+    }
+}
+
+/* Price rows that point to WhatsApp / Get a Quote instead of a fixed fare */
+.price-row .price-contact {
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: right;
+}
+.price-row .price-contact a {
+    color: var(--color-gold);
+    text-decoration: underline;
 }
