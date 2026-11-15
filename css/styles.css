@@ -760,13 +760,26 @@ section {
 
 .client-reviews-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: 1fr;
     gap: 1.5rem;
     margin-bottom: 0.5rem;
     justify-content: center;
+    align-items: stretch;
+}
+
+@media (min-width: 701px) {
+    .client-reviews-list:has(:nth-child(2)) {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 58rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 .client-review-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     background: var(--color-white);
     border-radius: 12px;
     border: 1px solid rgba(212, 175, 55, 0.18);
@@ -810,6 +823,7 @@ section {
 
 .client-review-card blockquote {
     margin: 0 0 1rem;
+    flex: 1;
 }
 
 .client-review-card blockquote p {
@@ -824,15 +838,18 @@ section {
 }
 
 .client-review-name {
-    display: block;
     font-weight: 600;
     color: var(--color-black);
 }
 
 .client-review-journey {
-    display: block;
     color: var(--color-medium-gray);
-    margin-top: 0.15rem;
+    font-weight: 500;
+}
+
+.client-review-journey::before {
+    content: " \00b7 ";
+    color: var(--color-medium-gray);
 }
 
 @media (max-width: 1100px) {

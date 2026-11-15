@@ -17,6 +17,12 @@ window.WMC_REVIEWS = [
         name: "Robert",
         rating: 5,
         quote: "Excellent service from start to finish! The driver was professional, friendly and punctual. The car was clean and comfortable. Highly recommended for anyone looking for reliable private hire services!"
+    },
+    {
+        name: "Alex",
+        journey: "Airport",
+        rating: 5,
+        quote: "Very professional service! The car was spotless, beautifully maintained and even had complimentary bottled water. Excellent cleanliness, comfort and attention to detail. Highly recommended!"
     }
 ];
 
