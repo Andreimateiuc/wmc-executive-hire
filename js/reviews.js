@@ -52,6 +52,8 @@ window.WMC_REVIEWS = [
     function renderTestimonials() {
         var section = document.getElementById("clientReviews");
         var list = document.getElementById("clientReviewsList");
+        var dots = document.getElementById("clientReviewsDots");
+        var controls = document.getElementById("clientReviewsControls");
         if (!section || !list) {
             return;
         }
@@ -59,11 +61,19 @@ window.WMC_REVIEWS = [
         var reviews = Array.isArray(window.WMC_REVIEWS) ? window.WMC_REVIEWS : [];
         if (!reviews.length) {
             section.hidden = true;
+            section.removeAttribute("data-count");
+            section.removeAttribute("data-desktop-slider");
             list.innerHTML = "";
+            if (dots) {
+                dots.innerHTML = "";
+            }
+            if (controls) {
+                controls.hidden = true;
+            }
             return;
         }
 
-        list.innerHTML = reviews.map(function (review) {
+        list.innerHTML = reviews.map(function (review, index) {
             var name = escapeHtml((review && review.name) || "Client");
             var journey = review && review.journey ? escapeHtml(review.journey) : "";
             var quote = escapeHtml((review && review.quote) || "");
@@ -72,15 +82,146 @@ window.WMC_REVIEWS = [
                 rating = 0;
             }
             var ratingLabel = rating ? rating + " out of 5" : "";
-            return '<article class="client-review-card">' +
+            return '<article class="client-review-card" data-review-index="' + index + '">' +
                 (rating ? '<div class="client-review-stars" aria-label="' + ratingLabel + '">' + starIcons(rating) + "</div>" : "") +
                 "<blockquote><p>" + quote + "</p></blockquote>" +
                 '<p class="client-review-meta"><span class="client-review-name">' + name + "</span>" +
-                (journey ? '<span class="client-review-journey">' + journey + "</span>" : "") +
+                (journey ? '<span class="client-review-sep" aria-hidden="true">&nbsp;&middot;&nbsp;</span><span class="client-review-journey">' + journey + "</span>" : "") +
                 "</p></article>";
         }).join("");
 
+        if (dots) {
+            dots.innerHTML = reviews.map(function (review, index) {
+                var label = escapeHtml((review && review.name) || ("Review " + (index + 1)));
+                return '<button type="button" class="client-reviews-dot' + (index === 0 ? " is-active" : "") +
+                    '" role="tab" aria-label="Show review by ' + label + '" aria-selected="' +
+                    (index === 0 ? "true" : "false") + '" data-review-index="' + index + '"></button>';
+            }).join("");
+        }
+
+        section.setAttribute("data-count", String(reviews.length));
+        if (reviews.length > 3) {
+            section.setAttribute("data-desktop-slider", "true");
+        } else {
+            section.removeAttribute("data-desktop-slider");
+        }
         section.hidden = false;
+        initReviewSlider(section, list, reviews.length);
+    }
+
+    function initReviewSlider(section, list, count) {
+        var controls = document.getElementById("clientReviewsControls");
+        var dots = section.querySelectorAll(".client-reviews-dot");
+        var prev = section.querySelector(".client-reviews-prev");
+        var next = section.querySelector(".client-reviews-next");
+        var cards = list.querySelectorAll(".client-review-card");
+        var mobileQuery = window.matchMedia("(max-width: 700px)");
+
+        function sliderActive() {
+            return count >= 2 && (mobileQuery.matches || count > 3);
+        }
+
+        function cardLeft(card) {
+            return card.getBoundingClientRect().left - list.getBoundingClientRect().left + list.scrollLeft;
+        }
+
+        function currentIndex() {
+            if (!cards.length) {
+                return 0;
+            }
+            var scroll = list.scrollLeft;
+            var best = 0;
+            var bestDist = Infinity;
+            var i;
+            for (i = 0; i < cards.length; i += 1) {
+                var dist = Math.abs(cardLeft(cards[i]) - scroll);
+                if (dist < bestDist) {
+                    bestDist = dist;
+                    best = i;
+                }
+            }
+            return best;
+        }
+
+        function goTo(index, smooth) {
+            var card = cards[index];
+            if (!card) {
+                return;
+            }
+            list.scrollTo({
+                left: cardLeft(card),
+                behavior: smooth === false ? "auto" : "smooth"
+            });
+        }
+
+        function updateChrome() {
+            var active = sliderActive();
+            if (controls) {
+                controls.hidden = !active;
+            }
+            if (!active) {
+                if (list.scrollLeft !== 0) {
+                    list.scrollLeft = 0;
+                }
+                return;
+            }
+            var index = currentIndex();
+            dots.forEach(function (dot, i) {
+                var isOn = i === index;
+                dot.classList.toggle("is-active", isOn);
+                dot.setAttribute("aria-selected", isOn ? "true" : "false");
+            });
+            if (prev) {
+                prev.disabled = index <= 0;
+            }
+            if (next) {
+                next.disabled = index >= count - 1;
+            }
+        }
+
+        if (list.dataset.sliderBound !== "true") {
+            list.dataset.sliderBound = "true";
+            list.addEventListener("scroll", updateChrome, { passive: true });
+            if (prev) {
+                prev.addEventListener("click", function () {
+                    goTo(Math.max(0, currentIndex() - 1));
+                });
+            }
+            if (next) {
+                next.addEventListener("click", function () {
+                    goTo(Math.min(count - 1, currentIndex() + 1));
+                });
+            }
+            list.addEventListener("keydown", function (event) {
+                if (!sliderActive()) {
+                    return;
+                }
+                if (event.key === "ArrowRight") {
+                    event.preventDefault();
+                    goTo(Math.min(count - 1, currentIndex() + 1));
+                } else if (event.key === "ArrowLeft") {
+                    event.preventDefault();
+                    goTo(Math.max(0, currentIndex() - 1));
+                }
+            });
+            if (mobileQuery.addEventListener) {
+                mobileQuery.addEventListener("change", updateChrome);
+            } else if (mobileQuery.addListener) {
+                mobileQuery.addListener(updateChrome);
+            }
+            window.addEventListener("resize", updateChrome);
+        }
+
+        dots.forEach(function (dot) {
+            dot.addEventListener("click", function () {
+                var index = parseInt(dot.getAttribute("data-review-index"), 10);
+                goTo(index);
+            });
+        });
+
+        list.setAttribute("tabindex", "0");
+        list.setAttribute("aria-label", "Client reviews");
+        updateChrome();
     }
 
     function setFieldError(id, message) {

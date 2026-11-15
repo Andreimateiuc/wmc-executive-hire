@@ -768,11 +768,84 @@ section {
 }
 
 @media (min-width: 701px) {
-    .client-reviews-list:has(:nth-child(2)) {
+    .client-reviews[data-count="2"] .client-reviews-list {
         grid-template-columns: repeat(2, 1fr);
         max-width: 58rem;
         margin-left: auto;
         margin-right: auto;
+    }
+
+    .client-reviews[data-count="3"] .client-reviews-list {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 72rem;
+        margin-left: auto;
+        margin-right: auto;
+        gap: 1.25rem;
+    }
+
+    .client-reviews[data-desktop-slider] .client-reviews-list {
+        display: flex;
+        max-width: 40rem;
+        margin-left: auto;
+        margin-right: auto;
+        gap: 0;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .client-reviews[data-desktop-slider] .client-reviews-list::-webkit-scrollbar {
+        display: none;
+    }
+
+    .client-reviews[data-desktop-slider] .client-review-card {
+        flex: 0 0 100%;
+        width: 100%;
+        max-width: 100%;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+        box-sizing: border-box;
+    }
+
+    .client-reviews[data-desktop-slider] .client-reviews-controls {
+        display: flex;
+    }
+}
+
+@media (max-width: 700px) {
+    .client-reviews[data-count]:not([data-count="1"]) .client-reviews-list {
+        display: flex;
+        gap: 0;
+        margin-bottom: 0;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        touch-action: pan-x;
+    }
+
+    .client-reviews[data-count]:not([data-count="1"]) .client-reviews-list::-webkit-scrollbar {
+        display: none;
+    }
+
+    .client-reviews[data-count]:not([data-count="1"]) .client-review-card {
+        flex: 0 0 100%;
+        width: 100%;
+        max-width: 100%;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+        box-sizing: border-box;
+    }
+
+    .client-reviews[data-count]:not([data-count="1"]) .client-reviews-controls {
+        display: flex;
     }
 }
 
@@ -842,14 +915,80 @@ section {
     color: var(--color-black);
 }
 
+.client-review-sep,
 .client-review-journey {
     color: var(--color-medium-gray);
     font-weight: 500;
 }
 
-.client-review-journey::before {
-    content: " \00b7 ";
-    color: var(--color-medium-gray);
+.client-reviews-controls {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85rem;
+    margin-top: 1rem;
+}
+
+.client-reviews-controls[hidden] {
+    display: none !important;
+}
+
+.client-reviews-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+}
+
+.client-reviews-dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border-radius: 50%;
+    border: 1.5px solid var(--color-gold);
+    background: transparent;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.client-reviews-dot.is-active {
+    background: var(--color-gold);
+    transform: scale(1.15);
+}
+
+.client-reviews-nav {
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--color-gold-dark);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.client-reviews-nav svg {
+    width: 16px;
+    height: 16px;
+    display: block;
+}
+
+.client-reviews-nav:hover:not(:disabled),
+.client-reviews-nav:focus-visible {
+    border-color: var(--color-gold);
+    background: #fff;
+}
+
+.client-reviews-nav:disabled {
+    opacity: 0.35;
+    cursor: default;
+    box-shadow: none;
 }
 
 @media (max-width: 1100px) {
