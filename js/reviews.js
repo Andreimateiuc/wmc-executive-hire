@@ -12,7 +12,13 @@
  *   quote: "The approved review text."
  * }
  */
-window.WMC_REVIEWS = [];
+window.WMC_REVIEWS = [
+    {
+        name: "Robert",
+        rating: 5,
+        quote: "Excellent service from start to finish! The driver was professional, friendly and punctual. The car was clean and comfortable. Highly recommended for anyone looking for reliable private hire services!"
+    }
+];
 
 (function () {
     var WA_BASE = "https://wa.me/447459417049";
