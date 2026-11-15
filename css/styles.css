@@ -672,6 +672,156 @@ section {
     margin-bottom: 1.15rem;
 }
 
+.review-form-wrap {
+    text-align: left;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(212, 175, 55, 0.22);
+}
+
+.review-form-wrap h3 {
+    font-size: 1.55rem;
+    text-align: center;
+    margin-bottom: 1.25rem;
+}
+
+.review-form {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.review-form .optional-label {
+    font-weight: 400;
+    color: var(--color-medium-gray);
+    font-size: 0.85rem;
+}
+
+.star-rating-label {
+    display: block;
+    font-weight: 600;
+    color: var(--color-black);
+    margin-bottom: 0.5rem;
+}
+
+.star-rating {
+    display: flex;
+    gap: 0.2rem;
+    align-items: center;
+}
+
+.star-btn {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--color-gold);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: var(--transition);
+}
+
+.star-btn svg {
+    width: 30px;
+    height: 30px;
+    display: block;
+    fill: transparent;
+    stroke: currentColor;
+    stroke-width: 1.4;
+    stroke-linejoin: round;
+}
+
+.star-btn.is-on svg,
+.star-btn[aria-checked="true"] svg {
+    fill: var(--color-gold);
+    stroke: var(--color-gold-dark);
+}
+
+.star-btn:hover,
+.star-btn:focus-visible {
+    background: rgba(212, 175, 55, 0.12);
+    outline: none;
+}
+
+.review-form .form-note {
+    margin-top: 0.9rem;
+}
+
+.client-reviews {
+    margin: 3rem 0 0;
+}
+
+.client-reviews .section-header {
+    margin-bottom: 2rem;
+}
+
+.client-reviews-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.client-review-card {
+    background: var(--color-white);
+    border-radius: 12px;
+    border: 1px solid rgba(212, 175, 55, 0.18);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem 1.35rem 1.35rem;
+}
+
+.client-review-stars {
+    display: flex;
+    gap: 0.15rem;
+    margin-bottom: 0.85rem;
+}
+
+.review-star svg,
+.client-review-stars .review-star svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+    fill: transparent;
+    stroke: var(--color-gold);
+    stroke-width: 1.4;
+    stroke-linejoin: round;
+}
+
+.review-star.is-on svg {
+    fill: var(--color-gold);
+    stroke: var(--color-gold-dark);
+}
+
+.client-review-card blockquote {
+    margin: 0 0 1rem;
+}
+
+.client-review-card blockquote p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-medium-gray);
+}
+
+.client-review-meta {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.client-review-name {
+    display: block;
+    font-weight: 600;
+    color: var(--color-black);
+}
+
+.client-review-journey {
+    display: block;
+    color: var(--color-medium-gray);
+    margin-top: 0.15rem;
+}
+
 @media (max-width: 1100px) {
     .benefits-grid {
         grid-template-columns: repeat(3, 1fr);

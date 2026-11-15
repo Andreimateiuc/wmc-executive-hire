@@ -345,9 +345,63 @@
                     <p>Mercedes E-Class, S-Class and V-Class, Tesla Model 3, Model S and Model Y, plus Standard Skoda Superb, Toyota Corolla Estate and Mercedes C-Class.</p>
                 </div>
             </div>
+            <div class="client-reviews" id="clientReviews" hidden>
+                <div class="section-header">
+                    <h2>What our clients say</h2>
+                </div>
+                <div class="client-reviews-list" id="clientReviewsList"></div>
+            </div>
+
             <div class="review-invite">
                 <p>Travelled with us? We&rsquo;d love to hear from you.</p>
                 <a class="btn btn-primary" href="https://www.facebook.com/share/1CMcqEMcQ1/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">Leave us a review</a>
+
+                <div class="review-form-wrap">
+                    <h3>Leave a review</h3>
+                    <form id="reviewForm" class="review-form" novalidate>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="reviewName">Name *</label>
+                                <input type="text" id="reviewName" name="reviewName" autocomplete="name" required aria-required="true" aria-describedby="reviewNameError">
+                                <span class="error-message" id="reviewNameError"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="reviewJourney">Journey <span class="optional-label">(optional)</span></label>
+                                <input type="text" id="reviewJourney" name="reviewJourney" placeholder="e.g. Northampton to Heathrow" autocomplete="off" aria-describedby="reviewJourneyError">
+                                <span class="error-message" id="reviewJourneyError"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <span class="star-rating-label" id="reviewRatingLabel">Rating *</span>
+                            <div class="star-rating" id="reviewStarRating" role="radiogroup" aria-labelledby="reviewRatingLabel">
+                                <button type="button" class="star-btn" data-rating="1" role="radio" aria-checked="false" aria-label="1 star">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.5l2.8 6.1 6.7.7-5 4.6 1.4 6.6L12 17.8 6.1 20.5 7.5 13.9l-5-4.6 6.7-.7L12 2.5z"/></svg>
+                                </button>
+                                <button type="button" class="star-btn" data-rating="2" role="radio" aria-checked="false" aria-label="2 stars">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.5l2.8 6.1 6.7.7-5 4.6 1.4 6.6L12 17.8 6.1 20.5 7.5 13.9l-5-4.6 6.7-.7L12 2.5z"/></svg>
+                                </button>
+                                <button type="button" class="star-btn" data-rating="3" role="radio" aria-checked="false" aria-label="3 stars">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.5l2.8 6.1 6.7.7-5 4.6 1.4 6.6L12 17.8 6.1 20.5 7.5 13.9l-5-4.6 6.7-.7L12 2.5z"/></svg>
+                                </button>
+                                <button type="button" class="star-btn" data-rating="4" role="radio" aria-checked="false" aria-label="4 stars">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.5l2.8 6.1 6.7.7-5 4.6 1.4 6.6L12 17.8 6.1 20.5 7.5 13.9l-5-4.6 6.7-.7L12 2.5z"/></svg>
+                                </button>
+                                <button type="button" class="star-btn" data-rating="5" role="radio" aria-checked="false" aria-label="5 stars">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.5l2.8 6.1 6.7.7-5 4.6 1.4 6.6L12 17.8 6.1 20.5 7.5 13.9l-5-4.6 6.7-.7L12 2.5z"/></svg>
+                                </button>
+                            </div>
+                            <input type="hidden" id="reviewRating" name="reviewRating" value="">
+                            <span class="error-message" id="reviewRatingError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="reviewMessage">Your review *</label>
+                            <textarea id="reviewMessage" name="reviewMessage" rows="4" required aria-required="true" aria-describedby="reviewMessageError" placeholder="Tell us about your journey"></textarea>
+                            <span class="error-message" id="reviewMessageError"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-large btn-full">Send on WhatsApp</button>
+                        <p class="form-note">Reviews are checked before they appear on our website.</p>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
@@ -446,5 +500,6 @@
     </a>
 
     <script src="js/main.js"></script>
+    <script src="js/reviews.js"></script>
 </body>
 </html>
