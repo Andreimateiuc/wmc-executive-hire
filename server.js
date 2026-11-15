@@ -388,6 +388,18 @@ app.get('/contact', (req, res) => {
     res.sendFile(path.join(__dirname, 'contact.html'));
 });
 
+app.get('/quote', (req, res) => {
+    res.sendFile(path.join(__dirname, 'quote.html'));
+});
+
+app.get('/privacy', (req, res) => {
+    res.sendFile(path.join(__dirname, 'privacy.html'));
+});
+
+app.get('/terms', (req, res) => {
+    res.sendFile(path.join(__dirname, 'terms.html'));
+});
+
 app.get('/admin', (req, res) => {
     res.sendFile(path.join(__dirname, 'admin/index.html'));
 });
