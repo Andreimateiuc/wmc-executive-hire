@@ -21,6 +21,7 @@
     --transition: all 0.3s ease;
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.2);
+    --header-height: 78px;
 }
 
 /* Reset & Base Styles */
@@ -189,21 +190,8 @@ h6 { font-size: 1rem; }
 
 .logo {
     display: flex;
-    flex-direction: column;
+    align-items: center;
     position: relative;
-    padding-left: 0.85rem;
-}
-
-.logo::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.15rem;
-    bottom: 0.2rem;
-    width: 3px;
-    border-radius: 999px;
-    background: linear-gradient(180deg, var(--color-gold-light), var(--color-gold));
-    box-shadow: 0 0 16px rgba(201, 169, 97, 0.45);
 }
 
 .logo-text {
@@ -318,7 +306,7 @@ h6 { font-size: 1rem; }
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    margin-top: 70px;
+    margin-top: var(--header-height);
     isolation: isolate;
 }
 
@@ -1046,7 +1034,7 @@ section {
     color: var(--color-white);
     text-align: center;
     padding: 8rem 0 4rem;
-    margin-top: 70px;
+    margin-top: var(--header-height);
     overflow: hidden;
     border-bottom: 1px solid rgba(212, 175, 55, 0.22);
 }
@@ -2589,6 +2577,7 @@ section {
 
 /* Responsive Design */
 @media (max-width: 968px) {
+    :root { --header-height: 70px; }
     h1 { font-size: 2.5rem; }
     h2 { font-size: 2rem; }
     h3 { font-size: 1.5rem; }
@@ -2599,7 +2588,7 @@ section {
     
     .nav-menu {
         position: fixed;
-        top: 78px;
+        top: calc(var(--header-height) + 0.5rem);
         left: 1rem;
         right: 1rem;
         width: auto;
@@ -2860,13 +2849,8 @@ textarea:focus {
     }
 }
 
-/* Mobile: stack logo text and subtitle so they don't overlap/wrap */
+/* Legacy text-logo sizes (unused in the image lockup) */
 @media (max-width: 768px) {
-    .logo a {
-        display: flex;
-        flex-direction: column;
-        gap: 0.2rem;
-    }
     .logo-text {
         font-size: 1.6rem;
     }
@@ -2961,40 +2945,22 @@ textarea:focus {
     font-size: 0.9rem;
 }
 
-/* WMC logo image in header (Nov 2026) */
+/* WMC header lockup: emblem only, high-res asset scaled down for retina */
 .logo a {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
     text-decoration: none;
+    line-height: 0;
 }
 .logo-img {
     display: block;
-    height: 46px;
+    height: 50px;
     width: auto;
+    object-fit: contain;
 }
-.logo .logo-subtitle {
-    font-size: 0.68rem;
-    letter-spacing: 2px;
-    line-height: 1.2;
-    white-space: nowrap;
-}
-@media (max-width: 768px) {
-    .logo a {
-        flex-direction: row;
-        align-items: center;
-        gap: 0.45rem;
-    }
+@media (max-width: 968px) {
     .logo-img {
-        height: 38px;
-    }
-    .logo .logo-subtitle {
-        font-size: 0.58rem;
-    }
-}
-@media (max-width: 360px) {
-    .logo .logo-subtitle {
-        display: none;
+        height: 42px;
     }
 }
 
