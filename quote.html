@@ -121,7 +121,8 @@
     <select id="cat">
     <option value="standard">Standard – Skoda Superb, Toyota Corolla Estate, Mercedes C-Class</option>
     <option value="tesla">Tesla – Model 3, Model S, Model Y</option>
-    <option value="mercedes">Mercedes – E-Class, S-Class</option>
+    <option value="mercedes">Mercedes E-Class (Comfort)</option>
+    <option value="mercedes_s">Mercedes S-Class (Executive)</option>
     <option value="mpv">Mercedes V-Class – up to 7 passengers</option>
     </select>
     <div class="row"><input id="ret" type="checkbox"><label for="ret">Return journey (2 × one-way)</label></div>
@@ -184,8 +185,7 @@
             <div class="footer-bottom">
                 <div class="footer-licensing">
                     <p><strong>WMC Executive Private Hire</strong></p>
-                    <p>In partnership with First Class Chauffeuring Limited</p>
-                    <p class="footer-licensed-by"><em>Licensed by West Northamptonshire Council · Licence No LN/202600406</em></p>
+                    <p>In partnership with First Class Chauffeuring Limited — <span class="footer-licensed-by">Licensed by West Northamptonshire Council, Licence No LN/202600406</span></p>
                 </div>
                 <p class="footer-copyright">&copy; 2026 WMC Executive Private Hire. All rights reserved.</p>
             </div>
@@ -206,14 +206,45 @@
     var MIN_MILES=15;
     var MIN_FARE=30;
     var WA_BASE="https://wa.me/447459417049";
-    var RATES={standard:{perMile:1.8},tesla:{perMile:2},mercedes:{perMile:2.2}};
-    var NAMES={standard:"Standard",tesla:"Tesla",mercedes:"Mercedes E/S-Class",mpv:"Mercedes V-Class"};
+    var RATES={standard:{perMile:1.8},tesla:{perMile:2},mercedes:{perMile:2.2},mercedes_s:{perMile:2.2}};
+    var NAMES={standard:"Standard",tesla:"Tesla",mercedes:"Mercedes E-Class",mercedes_s:"Mercedes S-Class",mpv:"Mercedes V-Class"};
+    // Fixed one-way airport fares from Northampton (same as prices.html). Tesla and V-Class have no fixed fare.
+    var AIRPORTS=[
+     {key:"heathrow",name:"Heathrow",re:/heathrow|\bLHR\b/i,lat:51.4700,lon:-0.4543,r:5,fares:{standard:135,mercedes:150,mercedes_s:180}},
+     {key:"luton",name:"Luton",re:/luton\s+(international\s+)?airport|\bLTN\b/i,lat:51.8747,lon:-0.3683,r:2.5,fares:{standard:80,mercedes:95,mercedes_s:115}},
+     {key:"birmingham",name:"Birmingham",re:/birmingham\s+(international\s+)?airport|\bBHX\b/i,lat:52.4539,lon:-1.7480,r:2.5,fares:{standard:90,mercedes:105,mercedes_s:135}},
+     {key:"gatwick",name:"Gatwick",re:/gatwick|\bLGW\b/i,lat:51.1537,lon:-0.1821,r:4,fares:{standard:175,mercedes:195,mercedes_s:250}},
+     {key:"stansted",name:"Stansted",re:/stansted\s+airport|\bSTN\b|stansted.*\bterminal\b/i,lat:51.8860,lon:0.2389,r:3,fares:{standard:135,mercedes:150,mercedes_s:200}},
+     {key:"eastmidlands",name:"East Midlands",re:/east\s+midlands\s+airport|nottingham\s+east\s+midlands|\bEMA\b/i,lat:52.8311,lon:-1.3281,r:2.5,fares:{standard:90,mercedes:105,mercedes_s:135}}
+    ];
+    var NORTHAMPTON={lat:52.2405,lon:-0.9027,r:8};
+    function kmBetween(a,b){var R=6371,t=Math.PI/180,dl=(b.lat-a.lat)*t,dn=(b.lon-a.lon)*t;
+     var h=Math.sin(dl/2)*Math.sin(dl/2)+Math.cos(a.lat*t)*Math.cos(b.lat*t)*Math.sin(dn/2)*Math.sin(dn/2);return 2*R*Math.asin(Math.min(1,Math.sqrt(h)));}
+    function hasPt(p){return p&&isFinite(Number(p.lat))&&isFinite(Number(p.lon))&&p.lat!==""&&p.lon!=="";}
+    function pt(p){return {lat:Number(p.lat),lon:Number(p.lon)};}
+    function detectAirport(text,coord){var t=String(text||"");
+     for(var i=0;i<AIRPORTS.length;i++){if(AIRPORTS[i].re.test(t))return AIRPORTS[i];}
+     if(hasPt(coord)){for(var j=0;j<AIRPORTS.length;j++){if(kmBetween(pt(coord),AIRPORTS[j])<=AIRPORTS[j].r)return AIRPORTS[j];}}
+     return null;}
+    function isNorthamptonArea(text,coord){var t=String(text||"");
+     if(/\bNorthampton\b(?!shire)/i.test(t))return true;
+     if(/\bNN[1-7]\s*\d[A-Z]{2}\b/i.test(t)||/^\s*NN[1-7]\s*$/i.test(t))return true;
+     if(hasPt(coord)&&kmBetween(pt(coord),NORTHAMPTON)<=NORTHAMPTON.r)return true;
+     return false;}
+    function fixedAirportFare(pickupText,pickupCoord,destText,destCoord,category){
+     var ap=detectAirport(destText,destCoord),other={t:pickupText,c:pickupCoord};
+     if(!ap){ap=detectAirport(pickupText,pickupCoord);other={t:destText,c:destCoord};}
+     if(!ap||!isNorthamptonArea(other.t,other.c))return null;
+     var fare=ap.fares[category];if(!(fare>0))return null;
+     return {airport:ap.name,key:ap.key,fare:fare};}
     function parseMiles(v){if(v===null||v===undefined)return {ok:false,error:"Enter the route distance in miles."};
      var s=String(v).trim();if(s==="")return {ok:false,error:"Enter the route distance in miles."};
      var n=Number(s);if(!isFinite(n))return {ok:false,error:"Distance must be a number."};
      if(n<=0)return {ok:false,error:"Distance must be greater than 0."};if(n>1500)return {ok:false,error:"Distance looks too large for a UK journey."};
      return {ok:true,value:n};}
-    function calcQuote(miles,rate,isReturn,category){if(category==="mpv"){var mv=parseMiles(miles);return {ok:false,vclass:true,miles:mv.ok?mv.value:null,error:"vclass"};}
+    function calcQuote(miles,rate,isReturn,category,fixed){if(category==="mpv"){var mv=parseMiles(miles);return {ok:false,vclass:true,miles:mv.ok?mv.value:null,error:"vclass"};}
+     if(fixed&&fixed.fare>0){var fm=parseMiles(miles),fl=isReturn?2:1;
+      return {ok:true,fixed:true,airport:fixed.airport,miles:fm.ok?fm.value:null,oneWay:fixed.fare,legs:fl,total:fixed.fare*fl};}
      var m=parseMiles(miles);if(!m.ok)return m;
      if(!rate||!(rate.perMile>=0)||!isFinite(rate.perMile))return {ok:false,error:"Rates are invalid."};
      if(m.value<MIN_MILES)return {ok:false,underMin:true,miles:m.value,error:"under_min"};
@@ -223,7 +254,7 @@
      return {ok:true,miles:m.value,mileage:Math.round(mileage*100)/100,minApplied:MIN_FARE>mileage,oneWay:oneWay,legs:legs,total:oneWay*legs};}
     function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
     function gbp(n){return "£"+Math.round(n);}
-    if(typeof module!=="undefined")module.exports={calcQuote:calcQuote,parseMiles:parseMiles,esc:esc,RATES:RATES,MIN_MILES:MIN_MILES,MIN_FARE:MIN_FARE};
+    if(typeof module!=="undefined")module.exports={calcQuote:calcQuote,parseMiles:parseMiles,esc:esc,RATES:RATES,MIN_MILES:MIN_MILES,MIN_FARE:MIN_FARE,AIRPORTS:AIRPORTS,detectAirport:detectAirport,isNorthamptonArea:isNorthamptonArea,fixedAirportFare:fixedAirportFare};
     if(typeof document!=="undefined"){
      var $=function(id){return document.getElementById(id)};
      var coords={pickup:null,dest:null};
@@ -246,6 +277,7 @@
       $(which).value=r.display_name;
       coords[which]={lat:r.lat,lon:r.lon,label:r.display_name};
       hideSuggest(which);
+      render();
       maybeRoute();
      }
      function buildWaUrl(r){
@@ -254,11 +286,11 @@
       var vehicle=NAMES[$("cat").value];
       var journey=$("ret").checked?"Return":"One-way";
       var milesLine=$("miles").value.trim()||"(not entered)";
-      var priceLine=(r&&r.ok)?"Estimated price: "+gbp(r.total):(r&&r.vclass)?"Mercedes V-Class – please quote":(r&&r.underMin)?"Under 15 miles – please quote":"Estimate pending";
+      var priceLine=(r&&r.ok&&r.fixed)?"Fixed airport fare ("+r.airport+"): "+gbp(r.total):(r&&r.ok)?"Estimated price: "+gbp(r.total):(r&&r.vclass)?"Mercedes V-Class – please quote":(r&&r.underMin)?"Under 15 miles – please quote":"Estimate pending";
       var text="Hello, I'd like to book a ride.\n\nPickup: "+pickup+"\nDestination: "+dest+"\nMiles: "+milesLine+"\nVehicle: "+vehicle+"\nJourney: "+journey+"\n"+priceLine;
       return WA_BASE+"?text="+encodeURIComponent(text);
      }
-     function render(){var k=$("cat").value,r=calcQuote($("miles").value,RATES[k],$("ret").checked,k),b=$("breakdown"),um=$("underMin"),umt=$("underMinText"),uml=$("underMinLink"),wa=$("waBook");
+     function render(){var k=$("cat").value,fx=fixedAirportFare($("pickup").value,coords.pickup,$("dest").value,coords.dest,k),r=calcQuote($("miles").value,RATES[k],$("ret").checked,k,fx),b=$("breakdown"),um=$("underMin"),umt=$("underMinText"),uml=$("underMinLink"),wa=$("waBook");
       um.style.display="none";
       if(r.vclass){
         $("price").textContent="—";
@@ -284,6 +316,10 @@
       }
       if(!r.ok){$("price").textContent="—";$("err").textContent=r.error;b.innerHTML="";wa.href=WA_BASE;wa.setAttribute("aria-disabled","true");return r;}
       $("err").textContent="";$("price").textContent=gbp(r.total);
+      if(r.fixed){
+       b.innerHTML="<tr><td>Fixed airport fare ("+esc(r.airport)+")</td><td>"+gbp(r.oneWay)+"</td></tr>"+(r.miles?"<tr><td>Distance</td><td>"+r.miles+" mi</td></tr>":"")+"<tr><td>One-way</td><td>"+gbp(r.oneWay)+"</td></tr>"+(r.legs===2?"<tr><td>Return (2 × one-way)</td><td>"+gbp(r.total)+"</td></tr>":"");
+       wa.href=buildWaUrl(r);wa.setAttribute("aria-disabled","false");
+       return r;}
       b.innerHTML="<tr><td>Distance</td><td>"+r.miles+" mi</td></tr><tr><td>Rate</td><td>£"+RATES[k].perMile.toFixed(2)+"/mi</td></tr><tr><td>Distance charge</td><td>"+r.miles+" mi × £"+RATES[k].perMile.toFixed(2)+" = "+gbp(r.mileage)+"</td></tr>"+(r.minApplied?"<tr><td>Minimum fare applied</td><td>"+gbp(MIN_FARE)+"</td></tr>":"")+"<tr><td>One-way</td><td>"+gbp(r.oneWay)+"</td></tr>"+(r.legs===2?"<tr><td>Return (2 × one-way)</td><td>"+gbp(r.total)+"</td></tr>":"");
       wa.href=buildWaUrl(r);
       wa.setAttribute("aria-disabled","false");
